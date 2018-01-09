@@ -1,5 +1,5 @@
 Main:
-    HttpPort: 8082
+    HttpPort: 8000
     HttpsOn: false
     Domain: ""
     HttpsPort: 443
@@ -10,8 +10,8 @@ Main:
     CookieHttpOnly: true
     OldSiteDomain: ""
 Site:
-    Name: "youBBS"
-    Desc: "Yet another bbs in go"
+    Name: "LirenCollegeBBS"
+    Desc: "Talk freely"
     AdminEmail: ""
     MainDomain: "http://127.0.0.1:8082"
     MainNodeIds: "1,2,3,4,5,6,7,8,9,10"
