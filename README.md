@@ -1,4 +1,4 @@
-Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)，相关技术文档见原 [repo](https://github.com/ego008/goyoubbs/blob/master/README.md)。
+Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)，相关技术文档见原 [repo](https://github.com/ego008/goyoubbs/blob/master/README.md)，部署教程见 <https://www.youbbs.org/t/2125>。
 
 ### 部署
 
