@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"crypto/tls"
-	"crypto/x509"
 	"flag"
 	"github.com/ego008/goyoubbs/cronjob"
 	"github.com/ego008/goyoubbs/getold"
@@ -13,10 +12,7 @@ import (
 	"github.com/xi2/httpgzip"
 	"goji.io"
 	"goji.io/pat"
-	"golang.org/x/crypto/acme/autocert"
-	"golang.org/x/crypto/ocsp"
 	"golang.org/x/net/http2"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -59,6 +55,8 @@ func main() {
 	if len(staticPath) == 0 {
 		staticPath = "static"
 	}
+	root.Handle(pat.New("/.well-known/acme-challenge/*"),
+		http.StripPrefix("/.well-known/acme-challenge/", http.FileServer(http.Dir(staticPath))))
 	root.Handle(pat.New("/static/*"),
 		http.StripPrefix("/static/", http.FileServer(http.Dir(staticPath))))
 
@@ -77,68 +75,22 @@ func main() {
 	if app.Cf.Main.HttpsOn {
 		// https
 		log.Println("Register sll for domain:", app.Cf.Main.Domain)
-
-		certManager := autocert.Manager{
-			Prompt:     autocert.AcceptTOS,
-			HostPolicy: autocert.HostWhitelist(app.Cf.Main.Domain),
-			Cache:      autocert.DirCache("certs"),
-			Email:      app.Cf.Site.AdminEmail,
-		}
-
-		// Configure a custom response function for SNI requests.
-		getCertificate := func(hello *tls.ClientHelloInfo) (*tls.Certificate, error) {
-			// Set a default server name if SNI was not sent
-			if hello.ServerName == "" {
-				hello.ServerName = app.Cf.Main.Domain
-			}
-
-			// Get a certificate from Let's Encrypt (or the cache)
-			cert, err := certManager.GetCertificate(hello)
-			if err != nil {
-				return nil, err
-			}
-
-			// Fetch and staple OCSP
-			x509Cert := cert.Leaf
-			ocspServer := x509Cert.OCSPServer[0]
-			x509Issuer, err := x509.ParseCertificate(cert.Certificate[1])
-			if err != nil {
-				log.Println(err)
-				return cert, nil
-			}
-			ocspRequest, err := ocsp.CreateRequest(x509Cert, x509Issuer, nil)
-			if err != nil {
-				log.Println(err)
-				return cert, nil
-			}
-			ocspRequestReader := bytes.NewReader(ocspRequest)
-			httpResponse, err := http.Post(ocspServer, "application/ocsp-request", ocspRequestReader)
-			if err != nil {
-				log.Println(err)
-				return cert, nil
-			}
-			defer httpResponse.Body.Close()
-			ocspResponseBytes, err := ioutil.ReadAll(httpResponse.Body)
-			if err != nil {
-				log.Println(err)
-				return cert, nil
-			}
-			cert.OCSPStaple = ocspResponseBytes
-			return cert, nil
-		}
+		log.Println("TLSCrtFile : ", app.Cf.Main.TLSCrtFile)
+		log.Println("TLSKeyFile : ", app.Cf.Main.TLSKeyFile)
+		
+		root.Use(stlAge)
 
 		srv = &http.Server{
 			Addr:    ":" + strconv.Itoa(app.Cf.Main.HttpsPort),
 			Handler: httpgzip.NewHandler(root, nil),
 			TLSConfig: &tls.Config{
-				GetCertificate: getCertificate,
-				NextProtos:     []string{http2.NextProtoTLS, "http/1.1"},
+				NextProtos: []string{http2.NextProtoTLS, "http/1.1"},
 			},
 			MaxHeaderBytes: int(app.Cf.Site.UploadMaxSizeByte),
 		}
 
 		go func() {
-			log.Fatal(srv.ListenAndServeTLS("", ""))
+			log.Fatal(srv.ListenAndServeTLS(app.Cf.Main.TLSCrtFile, app.Cf.Main.TLSKeyFile))
 		}()
 
 		log.Println("Web server Listen port", app.Cf.Main.HttpsPort)
@@ -180,4 +132,14 @@ func redirectHandler(w http.ResponseWriter, r *http.Request) {
 	// consider HSTS if your clients are browsers
 	w.Header().Set("Connection", "close")
 	http.Redirect(w, r, target, 301)
+}
+
+func stlAge(h http.Handler) http.Handler {
+	fn := func(w http.ResponseWriter, r *http.Request) {
+		// add max-age to get A+
+		w.Header().Add("Strict-Transport-Security", "max-age=63072000; includeSubDomains")
+		h.ServeHTTP(w, r)
+	}
+	return http.HandlerFunc(fn)
+	
 }
