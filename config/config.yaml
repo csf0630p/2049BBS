@@ -9,6 +9,8 @@ Main:
     CookieSecure: false
     CookieHttpOnly: true
     OldSiteDomain: ""
+    TLSCrtFile: ""
+    TLSKeyFile: ""
 Site:
     Name: "LirenCollegeBBS"
     Desc: "Talk freely"
