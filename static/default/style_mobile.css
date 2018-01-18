@@ -16,11 +16,28 @@ small { font-size: 11px; }
 img { border: none; }
 p {line-height:180%;margin-bottom:20px;}
 pre {
- white-space: pre-wrap;       /* css-3 */
- white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
- white-space: -pre-wrap;      /* Opera 4-6 */
- white-space: -o-pre-wrap;    /* Opera 7 */
- word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    white-space: pre;
+    vertical-align: baseline;
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace;
+    border-radius: 0.4em;
+    line-height: 1.45em;
+    font-size: 13px;
+    color: #93a1a1;
+    overflow: auto;
+}
+pre code {
+    font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace !important;
+    overflow: scroll;
+    overflow-y: hidden;
+    display: block;
+    padding: .8em !important;
+    overflow-x: auto;
+    line-height: 1.45em;
+    color: #93a1a1 !important;
 }
 
 html {height: 100%;}
