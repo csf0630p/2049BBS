@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"
+	// "bytes"
 	"context"
 	"crypto/tls"
 	"flag"
@@ -77,7 +77,7 @@ func main() {
 		log.Println("Register sll for domain:", app.Cf.Main.Domain)
 		log.Println("TLSCrtFile : ", app.Cf.Main.TLSCrtFile)
 		log.Println("TLSKeyFile : ", app.Cf.Main.TLSKeyFile)
-		
+
 		root.Use(stlAge)
 
 		srv = &http.Server{
@@ -141,5 +141,5 @@ func stlAge(h http.Handler) http.Handler {
 		h.ServeHTTP(w, r)
 	}
 	return http.HandlerFunc(fn)
-	
+
 }
