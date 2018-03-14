@@ -16,17 +16,17 @@ Site:
     Desc: "Talk freely"
     AdminEmail: ""
     MainDomain: "http://127.0.0.1:8082"
-    MainNodeIds: "1,2,3,4,5,6,7,8,9,10"
+    MainNodeIds: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"
     TimeZone: 8
-    HomeShowNum: 20
-    PageShowNum: 20
+    HomeShowNum: 40
+    PageShowNum: 40
     TagShowNum: 20
     CategoryShowNum: 20
-    TitleMaxLen: 180
+    TitleMaxLen: 80
     ContentMaxLen: 9000
-    PostInterval: 60
-    CommentListNum: 10
-    CommentInterval: 20
+    PostInterval: 300
+    CommentListNum: 50
+    CommentInterval: 300
     Authorized: false
     RegReview: false
     CloseReg: false
