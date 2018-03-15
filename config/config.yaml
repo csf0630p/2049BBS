@@ -28,7 +28,7 @@ Site:
     CommentListNum: 50
     CommentInterval: 300
     Authorized: false
-    RegReview: false
+    RegReview: true
     CloseReg: false
     AutoDataBackup: false
     AutoGetTag: true
