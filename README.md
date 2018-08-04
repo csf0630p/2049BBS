@@ -1,5 +1,20 @@
-Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)，相关技术文档见原 [repo](https://github.com/ego008/goyoubbs/blob/master/README.md)，部署教程见 <https://www.youbbs.org/t/2125>。
 
-### 部署
+2049bbs，一个无需手机号和邮箱即可注册发言的论坛。
 
-目前是最简配置，部署在阿里云上。暂时没有找到合适的域名，使用 ip 地址访问。
+## 安装
+
+2049bbs Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)，本仓库对主程序 `goyoubbs` 不做任何修改，只维护 `config`、`static` 和 `view` 等配置文件和样式。
+
+首先 clone 本仓库，然后在 [goyoubbs 仓库](https://github.com/ego008/goyoubbs/releases) 下载对应的主程序。
+
+```bash
+git clone https://github.com/Terminus2049/2049BBS.git
+cd 2049BBS
+
+## linus 系统 64位
+wget https://github.com/ego008/goyoubbs/releases/download/master/goyoubbs-linux-amd64.zip
+```
+
+然后运行 `./goyoubbs`
+
+在生产环境，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。

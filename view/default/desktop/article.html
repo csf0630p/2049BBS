@@ -24,7 +24,7 @@
 
                 {{if ge .CurrentUser.Flag 99}}
                  • <a href="/admin/post/edit/{{.Aobj.Id}}">编辑</a>
-                 • <a href="/admin/post/edit/{{.Aobj.Id}}?act=del" onclick="javascript:return confirm('您确定要删除吗?')">永久删除帖子</a>
+                      <a href="/admin/post/edit/{{.Aobj.Id}}?act=del"onclick="Javascript:return confirm('您确定要删除吗？')">永久删除帖子</a>
                 {{end}}
 
             </div>
@@ -280,3 +280,4 @@
 </script>
 
 {{ end}}
+
