@@ -15,6 +15,6 @@ cd 2049BBS
 wget https://github.com/ego008/goyoubbs/releases/download/master/goyoubbs-linux-amd64.zip
 ```
 
-然后运行 `./goyoubbs`
+然后运行 `sudo ./goyoubbs`，在浏览器打开 `127.0.0.1/` 即可。
 
-在生产环境，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。
+在生产环境中，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。
