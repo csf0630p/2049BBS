@@ -18,3 +18,7 @@ wget https://github.com/ego008/goyoubbs/releases/download/master/goyoubbs-linux-
 然后运行 `sudo ./goyoubbs`，在浏览器打开 `127.0.0.1/` 即可。
 
 在生产环境中，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。
+
+## 备份
+
+需要备份 `mydata.db` 和 `/static/avatar` 文件。
