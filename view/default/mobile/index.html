@@ -13,6 +13,7 @@
 <div class="main-box home-box-list">
 
      {{range $_, $item := .PageInfo.Items}}
+     {{if ne $item.Cname "水"}}
     <div class="post-list">
         <div class="item-avatar">
             <a href="/member/{{$item.Uid}}">
@@ -37,7 +38,7 @@
     </div>
 
     {{end}}
-
+    {{end}}
 
     <div class="pagination">
         {{if .PageInfo.HasPrev}}
@@ -52,4 +53,3 @@
 </div>
 
 {{ end}}
-
