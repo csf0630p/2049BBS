@@ -118,6 +118,17 @@
             {{end}}
 
             {{end}}
+            {{if .NewestNodes}}
+            <div class="main-box main-box-node">
+                <div class="btn">
+                    {{range $_, $v := .NewestNodes}}
+                    <a href="/n/{{$v.Id}}">{{$v.Name}}</a>
+                    {{end}}
+                    <div class="c"></div>
+                </div>
+                <div class="c"></div>
+            </div>
+            {{ end }}
 
             {{ template "content" . }}
 
@@ -180,19 +191,6 @@
 {{ end }}
 {{ end }}
 
-{{if .NewestNodes}}
-<div class="nav-title">新增主题</div>
-<div class="main-box main-box-node">
-    <div class="btn">
-        {{range $_, $v := .NewestNodes}}
-        <a href="/n/{{$v.Id}}">{{$v.Name}}</a>
-        {{end}}
-        <div class="c"></div>
-    </div>
-    <div class="c"></div>
-</div>
-{{ end }}
-
 {{if .HotNodes}}
 <div class="nav-title">热门主题</div>
 <div class="main-box main-box-node">
@@ -235,4 +233,3 @@
 {{ end }}
 
 {{ end}}
-
