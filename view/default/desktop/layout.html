@@ -57,7 +57,7 @@
                 var dispatch = function() {
                     q = document.getElementById("q");
                     if (q.value != "" && q.value != "站内搜索") {
-                        window.location.href = '/search?q=' + q.value;
+                        window.open('https://google.com/search?q=' + q.value + '%20site:2049bbs.xyz', '_blank');
                         return false;
                     } else {
                         return false;
