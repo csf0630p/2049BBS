@@ -1,23 +1,25 @@
+2049bbs，一个无需手机号和邮箱即可注册发言的论坛。Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)。
 
-2049bbs，一个无需手机号和邮箱即可注册发言的论坛。
+## 本地开发
 
-## 安装
-
-2049bbs Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)，本仓库对主程序 `goyoubbs` 不做任何修改，只维护 `config`、`static` 和 `view` 等配置文件和样式。
-
-首先 clone 本仓库，然后在 [goyoubbs 仓库](https://github.com/ego008/goyoubbs/releases) 下载对应的主程序。
+安装 [go](https://golang.org/dl/)，然后 clone 本仓库。
 
 ```bash
 git clone https://github.com/Terminus2049/2049BBS.git
 cd 2049BBS
-
-## linus 系统 64位
-wget https://github.com/ego008/goyoubbs/releases/download/master/goyoubbs-linux-amd64.zip
+go get github.com/ego008/goyoubbs
+go run main.go
 ```
 
 然后运行 `sudo ./goyoubbs`，在浏览器打开 `127.0.0.1/` 即可。
 
-在生产环境中，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。
+## 部署
+
+编译二进制文件 `go build`，非 Linux 平台为交叉编译 `GOOS=linux GOARCH=amd64 go build`。
+
+将编译好的二进制文件与 config、static 和 view 三个文件夹的文件放在同一个文件夹内，运行 `./goyoubbs`。
+
+服务器配置：在生产环境中，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。也可以自行申请 cloudflare 证书，相应配置可以参考 [config-2049.yaml](https://github.com/Terminus2049/2049BBS/blob/master/config/config-2049.yaml).
 
 ## 备份
 
