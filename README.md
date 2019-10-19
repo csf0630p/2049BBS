@@ -11,7 +11,7 @@ go get github.com/ego008/goyoubbs
 go run main.go
 ```
 
-然后运行 `sudo ./goyoubbs`，在浏览器打开 `127.0.0.1/` 即可。
+然后在浏览器打开 `127.0.0.1/` 即可，或者直接编译，运行 `sudo ./goyoubbs`，
 
 ## 部署
 
