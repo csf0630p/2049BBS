@@ -1,7 +1,7 @@
 Main:
-    HttpPort: 8082
-    HttpsOn: false
-    Domain: ""
+    HttpPort: 80
+    HttpsOn: true
+    Domain: "2049bbs.xyz"
     HttpsPort: 443
     PubDir: "static"
     ViewDir: "view/default"
@@ -9,23 +9,23 @@ Main:
     CookieSecure: false
     CookieHttpOnly: true
     OldSiteDomain: ""
-    TLSCrtFile: ""
-    TLSKeyFile: ""
+    TLSCrtFile: "certs/cloudflare.pem"
+    TLSKeyFile: "certs/cloudflare.key"
 Site:
-    Name: "youBBS"
-    Desc: "Yet another bbs in go"
+    Name: "2049BBS"
+    Desc: "Speak with no fear"
     AdminEmail: ""
-    MainDomain: "http://127.0.0.1:8082"
-    MainNodeIds: "1,2,3,4,5,6,7,8,9,10"
+    MainDomain: "http://2049bbs.xyz"
+    MainNodeIds: "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20"
     TimeZone: 8
-    HomeShowNum: 20
+    HomeShowNum: 40
     PageShowNum: 20
-    TagShowNum: 20
+    TagShowNum: 30
     CategoryShowNum: 20
-    TitleMaxLen: 180
+    TitleMaxLen: 80
     ContentMaxLen: 9000
     PostInterval: 60
-    CommentListNum: 10
+    CommentListNum: 50
     CommentInterval: 20
     Authorized: false
     RegReview: false
