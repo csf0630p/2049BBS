@@ -1,4 +1,4 @@
-2049bbs，一个无需手机号和邮箱即可注册发言的论坛。Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)。
+2049bbs，一个无需手机号和邮箱即可注册发言的论坛。Fork 自 [goyoubbs](https://github.com/terminus2049/2049bbs)。
 
 ## 本地开发
 
@@ -7,7 +7,7 @@
 ```bash
 git clone https://github.com/Terminus2049/2049BBS.git
 cd 2049BBS
-go get github.com/ego008/goyoubbs
+go get github.com/terminus2049/2049bbs
 go run main.go
 ```
 

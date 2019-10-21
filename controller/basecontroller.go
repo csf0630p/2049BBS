@@ -3,8 +3,8 @@ package controller
 import (
 	"encoding/json"
 	"errors"
-	"github.com/ego008/goyoubbs/model"
-	"github.com/ego008/goyoubbs/system"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/system"
 	"github.com/ego008/youdb"
 	"html/template"
 	"net/http"

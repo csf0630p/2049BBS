@@ -2,7 +2,7 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/ego008/goyoubbs/model"
+	"github.com/terminus2049/2049bbs/model"
 	"github.com/rs/xid"
 	"net/http"
 	"strconv"

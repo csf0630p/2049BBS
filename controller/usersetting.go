@@ -3,8 +3,8 @@ package controller
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/ego008/goyoubbs/model"
-	"github.com/ego008/goyoubbs/util"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/util"
 	"github.com/ego008/youdb"
 	"github.com/rs/xid"
 	"io"

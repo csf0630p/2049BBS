@@ -3,8 +3,8 @@ package cronjob
 import (
 	"encoding/json"
 	"github.com/boltdb/bolt"
-	"github.com/ego008/goyoubbs/model"
-	"github.com/ego008/goyoubbs/system"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/system"
 	"github.com/ego008/youdb"
 	"github.com/weint/httpclient"
 	"os"

@@ -3,7 +3,7 @@ package model
 import (
 	"encoding/json"
 	"errors"
-	"github.com/ego008/goyoubbs/util"
+	"github.com/terminus2049/2049bbs/util"
 	"github.com/ego008/youdb"
 	"html/template"
 )
