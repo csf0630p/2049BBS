@@ -24,7 +24,7 @@ func TimeFmt(tp interface{}, sample string, tz int) string {
 		sample = "2006-01-02 15:04:05"
 	}
 	tm := time.Unix(t, offset).UTC()
-	return tm.Format(sample)
+	return tm.Format("2006-01-02")
 }
 
 func TimeHuman(ts interface{}) string {
