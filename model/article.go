@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"././util"
+	"github.com/terminus2049/2049bbs/util"
 	"github.com/ego008/youdb"
 )
 
