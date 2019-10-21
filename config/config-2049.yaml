@@ -25,7 +25,7 @@ Site:
     TitleMaxLen: 80
     ContentMaxLen: 9000
     PostInterval: 60
-    CommentListNum: 50
+    CommentListNum: 100
     CommentInterval: 20
     Authorized: false
     RegReview: false
