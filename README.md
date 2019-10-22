@@ -1,4 +1,4 @@
-2049bbs，一个无需手机号和邮箱即可注册发言的论坛。Fork 自 [goyoubbs](https://github.com/terminus2049/2049bbs)。
+2049bbs，一个无需手机号和邮箱即可注册发言的论坛。Fork 自 [goyoubbs](https://github.com/ego008/goyoubbs)。
 
 ## 本地开发
 
