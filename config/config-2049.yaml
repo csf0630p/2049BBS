@@ -30,7 +30,7 @@ Site:
     Authorized: false
     RegReview: false
     CloseReg: false
-    AutoDataBackup: false
+    AutoDataBackup: true
     AutoGetTag: true
     GetTagApi: "http://youbbs.sinaapp.com/fencigoapi.php"
     QQClientID: 0
