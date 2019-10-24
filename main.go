@@ -120,6 +120,8 @@ func main() {
 			Handler:        httpgzip.NewHandler(root, nil),
 			TLSConfig:      tlsCf,
 			MaxHeaderBytes: int(app.Cf.Site.UploadMaxSizeByte),
+			ReadTimeout: 5 * time.Second,
+			WriteTimeout: 10 * time.Second,
 		}
 
 		go func() {
