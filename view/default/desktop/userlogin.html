@@ -17,6 +17,8 @@
         <p><img id="image" onclick="reload()" style="margin-left: 30px;" src="/captcha/{{.CaptchaId}}.png" alt="Captcha image"></p>
         <p><label>验证码： <input type="text" id="captchaSolution" class="sl w200" value="" /></label></p>
 
+        <p class="fs12" style="margin-left:60px;">注册即同意：理性讨论，不情绪化。</p>
+
         <p><input type="submit" value=" {{.Title}} " id="submit" class="textbtn newpostbtn" style="margin-left:60px;" /> </p>
         {{if eq .Act "login"}}
             {{if .SiteCf.CloseReg}}
