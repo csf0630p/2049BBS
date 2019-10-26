@@ -33,6 +33,25 @@ blockquote {
   }
 }
 
+// Table
+table {
+  margin-bottom: 1rem;
+  width: 100%;
+  border: 1px solid #eee;
+  border-collapse: collapse;
+}
+
+td, th {
+  padding: .25rem .5rem;
+  border: 1px solid #eee;
+  word-break: break-all;
+}
+
+tbody tr:nth-child(odd) td,
+tbody tr:nth-child(odd) th {
+  background-color: $table-background-color;
+}
+
 ol, ul {
   padding-left: 2em;
   line-height:160%;margin-bottom:6px;
