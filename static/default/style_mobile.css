@@ -67,15 +67,14 @@ pre {
     color: #93a1a1;
     overflow: auto;
 }
-pre code {
+
+p code {
     font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace !important;
-    overflow: scroll;
-    overflow-y: hidden;
-    display: block;
-    padding: .8em !important;
-    overflow-x: auto;
-    line-height: 1.45em;
-    color: #93a1a1 !important;
+    box-sizing: border-box;
+    background-color: rgba(33,42,51,.05);
+    border-radius: 2px;
+    padding: .2em .3em;
+    font-size: 85%;
 }
 
 html {height: 100%;}
