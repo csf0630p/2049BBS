@@ -23,7 +23,7 @@ Site:
     TagShowNum: 30
     CategoryShowNum: 20
     TitleMaxLen: 80
-    ContentMaxLen: 9000
+    ContentMaxLen: 20000
     PostInterval: 60
     CommentListNum: 100
     CommentInterval: 20
