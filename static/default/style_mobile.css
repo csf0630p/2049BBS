@@ -9,12 +9,13 @@ h2 { font-size:22px; }
 h3 { font-size:20px; }
 h4 { font-size:18px; }
 h5 { font-size:15px; }
-h1, h2, h3, h4, h5 { font-weight:normal; }
+h1 { font-weight:normal;}
+h2, h3, h4, h5 { font-weight:normal; margin-bottom:15px; margin-top: 15px;}
 
 small { font-size: 11px; }
 
 img { border: none; }
-p {line-height:180%;margin-bottom:20px;}
+p {line-height:160%;margin-bottom:6px;}
 pre {
     margin: 0;
     padding: 0;
