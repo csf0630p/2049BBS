@@ -108,7 +108,7 @@ func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int) CommentPageIn
 				Name:       user.Name,
 				Avatar:     user.Avatar,
 				AddTime:    citem.AddTime,
-				AddTimeFmt: util.TimeFmt(citem.AddTime, "2006-01-02 15:04", tz),
+				AddTimeFmt: util.TimeFmt(citem.AddTime, "2006-01-02", tz),
 				ContentFmt: template.HTML(util.ContentFmt(db, citem.Content)),
 			}
 			items = append(items, item)

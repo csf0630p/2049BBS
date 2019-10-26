@@ -488,8 +488,8 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 		Name:        author.Name,
 		Avatar:      author.Avatar,
 		Views:       viewsNum,
-		AddTimeFmt:  util.TimeFmt(aobj.AddTime, "2006-01-02 15:04", scf.TimeZone),
-		EditTimeFmt: util.TimeFmt(aobj.EditTime, "2006-01-02 15:04", scf.TimeZone),
+		AddTimeFmt:  util.TimeFmt(aobj.AddTime, "2006-01-02", scf.TimeZone),
+		EditTimeFmt: util.TimeFmt(aobj.EditTime, "2006-01-02", scf.TimeZone),
 	}
 
 	if len(aobj.Tags) > 0 {

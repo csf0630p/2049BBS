@@ -315,7 +315,7 @@ func (h *BaseHandler) UserDetail(w http.ResponseWriter, r *http.Request) {
 	evn.Act = act
 	evn.Uobj = userDetail{
 		User:       uobj,
-		RegTimeFmt: util.TimeFmt(uobj.RegTime, "2006-01-02 15:04", scf.TimeZone),
+		RegTimeFmt: util.TimeFmt(uobj.RegTime, "2006-01-02", scf.TimeZone),
 	}
 	evn.PageInfo = pageInfo
 

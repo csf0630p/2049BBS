@@ -21,10 +21,10 @@ func TimeFmt(tp interface{}, sample string, tz int) string {
 		t = tp.(int64)
 	}
 	if len(sample) == 0 {
-		sample = "2006-01-02 15:04:05"
+		sample = "2006-01-02"
 	}
 	tm := time.Unix(t, offset).UTC()
-	return tm.Format("2006-01-02")
+	return tm.Format(sample)
 }
 
 func TimeHuman(ts interface{}) string {

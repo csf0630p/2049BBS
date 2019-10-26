@@ -187,7 +187,7 @@ func ArticleList(db *youdb.DB, cmd, tb, key, score string, limit, tz int) Articl
 				Ruid:        article.Ruid,
 				Title:       article.Title,
 				EditTime:    article.EditTime,
-				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02 15:04", tz),
+				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				Comments:    article.Comments,
 			}
 			if article.Ruid > 0 {
@@ -392,7 +392,7 @@ func UserArticleList(db *youdb.DB, cmd, tb, key string, limit, tz int) ArticlePa
 				Ruid:        article.Ruid,
 				Title:       article.Title,
 				EditTime:    article.EditTime,
-				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02 15:04", tz),
+				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				Comments:    article.Comments,
 			}
 			if article.Ruid > 0 {
@@ -490,7 +490,7 @@ func ArticleNotificationList(db *youdb.DB, ids string, tz int) ArticlePageInfo {
 				Ruid:        article.Ruid,
 				Title:       article.Title,
 				EditTime:    article.EditTime,
-				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02 15:04", tz),
+				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				Comments:    article.Comments,
 			}
 			if article.Ruid > 0 {
@@ -590,7 +590,7 @@ func ArticleSearchList(db *youdb.DB, where, kw string, limit, tz int) ArticlePag
 				Ruid:        article.RUid,
 				Title:       article.Title,
 				EditTime:    article.EditTime,
-				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02 15:04", tz),
+				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				Comments:    article.Comments,
 			}
 			if article.RUid > 0 {
