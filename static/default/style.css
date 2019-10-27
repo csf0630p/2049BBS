@@ -100,7 +100,7 @@ a:hover {color: #bd0a01;text-decoration: underline;}
 .grey {color: #999;}
 .red {color: #bd0a01;}
 .fs12 {font-size:12px;line-height:1.2em;}
-.fs12 td {border: none}
+.fs12 td {border: none;}
 .fs14 {font-size:14px;line-height:20px;}
 .textbtn {
     cursor: pointer;
@@ -216,7 +216,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .has_adv {background-color:#F6F6F6;padding:10px;margin-bottom:10px;}
                 .has_adv h3{color: #444;font-size:13px;font-weight:bold;margin-bottom:6px;}
                 .rel_list {list-style:none;margin-bottom:2px;}
-                .rel_list li{float:left;width:48%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px;line-height:1.2em;padding-left:0em }
+                .rel_list li{float:left;width:48%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px;line-height:1.2em;padding-left:0em;}
                 .rel_list li a {font-size:12px;color:#333;text-decoration: none;padding-left: 25px;background: url('img/dot.png') no-repeat 10px 6px;}
                 .rel_list li a:hover {color:#000;text-decoration: underline;}
 
