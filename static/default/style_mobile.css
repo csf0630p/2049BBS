@@ -216,7 +216,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .rel_list li a {font-size:12px;color:#333;text-decoration: none;padding-left: 25px;background: url('img/dot.png') no-repeat 10px 6px;}
                 .rel_list li a:hover {color:#000;text-decoration: underline;}
 
-                .bot-side-info {color: #999;}
+                .bot-side-info {color: #999;padding-left:.7em;}
                 .bot-side-info li {margin-bottom: 8px;}
 
 .footer-wrap {width:100%;margin-bottom:0px;color:#999;background-color: #EDEDED;border-top:1px solid #E0E0E0;}
