@@ -10,7 +10,12 @@ h3 { font-size:20px; }
 h4 { font-size:18px; }
 h5 { font-size:15px; }
 h1 { font-weight:normal;}
-h2, h3, h4, h5 { font-weight:normal; margin-bottom:15px; margin-top: 15px;}
+h2, h3, h4, h5 {
+  font-weight:normal;
+  margin-bottom:15px;
+  margin-top: 15px;
+  line-height:160%;
+}
 
 small { font-size: 11px; }
 
@@ -94,6 +99,7 @@ a:hover {color: #bd0a01;text-decoration: underline;}
 .grey {color: #999;}
 .red {color: #bd0a01;}
 .fs12 {font-size:12px;line-height:1.2em;}
+.fs12 td {border: none}
 .fs14 {font-size:14px;line-height:20px;}
 .textbtn {
     cursor: pointer;
@@ -205,7 +211,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .mytag {font-size:13px;padding:2px 2px 2px 20px;margin:10px 2px 4px 2px;background: url(img/tag.gif) no-repeat 0 6px;color:#CCC;}
                 .has_adv {background-color:#F6F6F6;padding:10px;margin-bottom:10px;}
                 .has_adv h3{color: #444;font-size:13px;font-weight:bold;margin-bottom:6px;}
-                .rel_list {list-style:none;margin-bottom:2px;}
+                .rel_list {list-style:none;margin-bottom:2px;padding-left:0em}
                 .rel_list li{float:left;width:98%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px;line-height:1.2em;}
                 .rel_list li a {font-size:12px;color:#333;text-decoration: none;padding-left: 25px;background: url('img/dot.png') no-repeat 10px 6px;}
                 .rel_list li a:hover {color:#000;text-decoration: underline;}
