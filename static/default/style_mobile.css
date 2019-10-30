@@ -35,13 +35,10 @@ blockquote p {
     SimKai,DFKai-SB,NSimSun,serif
 }
 
-table {
-  margin-bottom: 10px;
-}
-
 /* Table */
 table {
-  width: 100%;
+  max-width: 100%;
+  margin-bottom: 10px;
   border: 1px solid #eee;
   border-collapse: collapse;
 }
