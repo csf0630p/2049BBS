@@ -29,7 +29,7 @@ blockquote {
   font-weight: 300;
   padding: 0 0 0 1.4rem;
   margin: 0 2.0rem 1rem 0rem;
-  border-left: .2em solid $blockquote-border-color;
+  border-left: .2em solid #ddd;
   text-align: justify;
 
   p {
