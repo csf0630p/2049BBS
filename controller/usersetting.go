@@ -118,6 +118,7 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 		About     string `json:"about"`
 		Password0 string `json:"password0"`
 		Password  string `json:"password"`
+		IgnoreNode string `json:"ignorenode"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -140,6 +141,7 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 		currentUser.Email = rec.Email
 		currentUser.Url = rec.Url
 		currentUser.About = rec.About
+		currentUser.IgnoreNode = rec.IgnoreNode
 		isChanged = true
 	} else if recAct == "change_pw" {
 		if len(rec.Password0) == 0 || len(rec.Password) == 0 {

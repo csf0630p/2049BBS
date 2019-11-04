@@ -18,6 +18,10 @@
             <td width="auto" align="left"><textarea class="ml wb80" id="about">{{.Uobj.About}}</textarea></td>
         </tr>
         <tr>
+            <td width="120" align="right">忽略节点</td>
+            <td width="auto" align="left"><textarea class="sl wb80" id="ignorenode">{{.Uobj.IgnoreNode}}</textarea></td>
+        </tr>
+        <tr>
             <td width="120" align="right"></td>
             <td width="auto" align="left"><input type="submit" value="保存设置" name="submit" class="textbtn" /></td>
         </tr>
@@ -33,11 +37,13 @@
         var email = $('#email').val();
         var url = $('#url').val();
         var about = $('#about').val();
+        var ignorenode = $('#ignorenode').val();
 
         $.ajax({
             type: "POST",
             url: "/setting",
-            data: JSON.stringify({'act': 'info', 'email': email, 'url': url, 'about': about}),
+            data: JSON.stringify({'act': 'info', 'email': email, 'url': url,
+                                'about': about, 'ignorenode': ignorenode}),
             dataType: "json",
             contentType: "application/json",
             success: function(data){

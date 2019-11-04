@@ -355,6 +355,24 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
+	if currentUser.IgnoreNode != "" {
+		for _, node := range strings.Split(currentUser.IgnoreNode, ",") {
+			node, err := strconv.Atoi(node)
+
+			if err != nil {
+				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				return
+			}
+
+			for i := 0; i < len(pageInfo.Items); i++ {
+				if pageInfo.Items[i].Cid == uint64(node) {
+					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
+					i--
+				}
+			}
+		}
+	}
+
 	evn.SiteInfo = si
 	evn.PageInfo = pageInfo
 	evn.Links = model.LinkList(db, false)

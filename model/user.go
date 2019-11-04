@@ -26,6 +26,7 @@ type User struct {
 	NoticeNum     int    `json:"noticenum"`
 	Hidden        bool   `json:"hidden"`
 	Session       string `json:"session"`
+	IgnoreNode    string `json:"ignorenode"`
 }
 
 type UserMini struct {
