@@ -435,7 +435,9 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 				}
 				if len(keys) > 0 {
 					rs := db.Hmget("article", keys)
-					currentUser.NoticeNum = len(rs.Data)
+					currentUser.NoticeNum = len(rs.Data)/2
+				}else{
+					currentUser.NoticeNum = 0
 				}
 				jb, _ := json.Marshal(currentUser)
 				db.Hset("user", youdb.I2b(currentUser.Id), jb)
