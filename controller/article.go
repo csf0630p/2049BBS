@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/util"
 	"github.com/ego008/youdb"
 	"github.com/rs/xid"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/util"
 	"goji.io/pat"
 )
 
@@ -373,6 +373,24 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	if currentUser.IgnoreUser != "" {
+		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
+			uid, err := strconv.Atoi(uid)
+
+			if err != nil {
+				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				return
+			}
+
+			for i := 0; i < len(pageInfo.Items); i++ {
+				if pageInfo.Items[i].Uid == uint64(uid) {
+					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
+					i--
+				}
+			}
+		}
+	}
+
 	evn.SiteInfo = si
 	evn.PageInfo = pageInfo
 	evn.Links = model.LinkList(db, false)
@@ -435,8 +453,8 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 				}
 				if len(keys) > 0 {
 					rs := db.Hmget("article", keys)
-					currentUser.NoticeNum = len(rs.Data)/2
-				}else{
+					currentUser.NoticeNum = len(rs.Data) / 2
+				} else {
 					currentUser.NoticeNum = 0
 				}
 				jb, _ := json.Marshal(currentUser)
@@ -471,6 +489,24 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 
 	cobj.Articles = db.Zget("category_article_num", youdb.I2b(cobj.Id)).Uint64()
 	pageInfo := model.CommentList(db, cmd, "article_comment:"+aid, key, scf.CommentListNum, scf.TimeZone)
+
+	if currentUser.IgnoreUser != "" {
+		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
+			uid, err := strconv.Atoi(uid)
+
+			if err != nil {
+				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				return
+			}
+
+			for i := 0; i < len(pageInfo.Items); i++ {
+				if pageInfo.Items[i].Uid == uint64(uid) {
+					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
+					i--
+				}
+			}
+		}
+	}
 
 	type articleForDetail struct {
 		model.Article

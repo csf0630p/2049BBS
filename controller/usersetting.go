@@ -3,14 +3,15 @@ package controller
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/util"
-	"github.com/ego008/youdb"
-	"github.com/rs/xid"
 	"io"
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/ego008/youdb"
+	"github.com/rs/xid"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/util"
 )
 
 func (h *BaseHandler) UserSetting(w http.ResponseWriter, r *http.Request) {
@@ -112,13 +113,14 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	type recForm struct {
-		Act       string `json:"act"`
-		Email     string `json:"email"`
-		Url       string `json:"url"`
-		About     string `json:"about"`
-		Password0 string `json:"password0"`
-		Password  string `json:"password"`
+		Act        string `json:"act"`
+		Email      string `json:"email"`
+		Url        string `json:"url"`
+		About      string `json:"about"`
+		Password0  string `json:"password0"`
+		Password   string `json:"password"`
 		IgnoreNode string `json:"ignorenode"`
+		IgnoreUser string `json:"ignoreuser"`
 	}
 
 	decoder := json.NewDecoder(r.Body)
@@ -142,6 +144,7 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 		currentUser.Url = rec.Url
 		currentUser.About = rec.About
 		currentUser.IgnoreNode = rec.IgnoreNode
+		currentUser.IgnoreUser = rec.IgnoreUser
 		isChanged = true
 	} else if recAct == "change_pw" {
 		if len(rec.Password0) == 0 || len(rec.Password) == 0 {

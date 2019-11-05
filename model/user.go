@@ -3,6 +3,7 @@ package model
 import (
 	"encoding/json"
 	"errors"
+
 	"github.com/ego008/youdb"
 )
 
@@ -27,6 +28,7 @@ type User struct {
 	Hidden        bool   `json:"hidden"`
 	Session       string `json:"session"`
 	IgnoreNode    string `json:"ignorenode"`
+	IgnoreUser    string `json:"ignoreuser"`
 }
 
 type UserMini struct {
