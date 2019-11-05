@@ -207,9 +207,13 @@
                     success: function(data){
                         if(data.retcode == 200) {
                             location.reload();
+                        }else{
+                            $.toast(data.retmsg);
+                            $("#btn-submit").attr("disabled", false);
                         }
                     },
                     fail: function(errMsg) {
+                        $.toast(errMsg);
                         $("#btn-preview").attr("disabled", false);
                     }
                 });
