@@ -2,16 +2,17 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/dchest/captcha"
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/util"
-	"github.com/ego008/youdb"
-	"github.com/rs/xid"
-	"goji.io/pat"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/dchest/captcha"
+	"github.com/ego008/youdb"
+	"github.com/rs/xid"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/util"
+	"goji.io/pat"
 )
 
 func (h *BaseHandler) UserLogin(w http.ResponseWriter, r *http.Request) {
@@ -211,6 +212,27 @@ func (h *BaseHandler) UserNotification(w http.ResponseWriter, r *http.Request) {
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	evn.PageInfo = model.ArticleNotificationList(db, currentUser.Notice, scf.TimeZone)
+
+	// fix currentUser.NoticeNum != len(evn.PageInfo.Items)
+	if currentUser.NoticeNum != len(evn.PageInfo.Items) {
+		var keys [][]byte
+		for _, v := range strings.Split(currentUser.Notice, ",") {
+			keys = append(keys, youdb.DS2b(v))
+		}
+
+		var newKeys []string
+		db.Hmget("article", keys).KvEach(func(key, value youdb.BS) {
+			newKeys = append(newKeys, youdb.B2ds(key))
+		})
+
+		currentUser.Notice = strings.Join(newKeys, ",")
+		currentUser.NoticeNum = len(newKeys)
+
+		jb, _ := json.Marshal(currentUser)
+		db.Hset("user", youdb.I2b(currentUser.Id), jb)
+
+		evn.CurrentUser = currentUser
+	}
 
 	h.Render(w, tpl, evn, "layout.html", "notification.html")
 }

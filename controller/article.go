@@ -447,16 +447,7 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 			newNotice := "," + currentUser.Notice + ","
 			if strings.Index(newNotice, subStr) >= 0 {
 				currentUser.Notice = strings.Trim(strings.Replace(newNotice, subStr, "", 1), ",")
-				var keys [][]byte
-				for _, v := range strings.Split(currentUser.Notice, ",") {
-					keys = append(keys, youdb.DS2b(v))
-				}
-				if len(keys) > 0 {
-					rs := db.Hmget("article", keys)
-					currentUser.NoticeNum = len(rs.Data) / 2
-				} else {
-					currentUser.NoticeNum = 0
-				}
+				currentUser.NoticeNum = len(strings.Split(currentUser.Notice, ","))
 				jb, _ := json.Marshal(currentUser)
 				db.Hset("user", youdb.I2b(currentUser.Id), jb)
 			}
