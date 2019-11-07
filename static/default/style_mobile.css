@@ -70,6 +70,13 @@ pre {
     overflow: auto;
 }
 
+pre code {
+    min-width: max-content;
+    /* for compatibility */
+    min-width: -moz-max-content;
+    min-width: -webkit-max-content;
+}
+
 p code {
     font-family: Menlo,Monaco,"Andale Mono","lucida console","Courier New",monospace !important;
     box-sizing: border-box;
