@@ -360,7 +360,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 			node, err := strconv.Atoi(node)
 
 			if err != nil {
-				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				w.Write([]byte(`{"retcode":400,"retmsg":"忽略节点id应为整数，请在设置中检查。"}`))
 				return
 			}
 
@@ -378,7 +378,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 			uid, err := strconv.Atoi(uid)
 
 			if err != nil {
-				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				w.Write([]byte(`{"retcode":400,"retmsg":"忽略用户id应为整数，请在设置中检查。"}`))
 				return
 			}
 

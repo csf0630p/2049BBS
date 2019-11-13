@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/ego008/youdb"
@@ -143,7 +144,11 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 		currentUser.Email = rec.Email
 		currentUser.Url = rec.Url
 		currentUser.About = rec.About
+		rec.IgnoreNode = strings.ReplaceAll(rec.IgnoreNode, " ", "")
+		rec.IgnoreNode = strings.ReplaceAll(rec.IgnoreNode, "，", ",")
 		currentUser.IgnoreNode = rec.IgnoreNode
+		rec.IgnoreUser = strings.ReplaceAll(rec.IgnoreUser, " ", "")
+		rec.IgnoreUser = strings.ReplaceAll(rec.IgnoreUser, "，", ",")
 		currentUser.IgnoreUser = rec.IgnoreUser
 		isChanged = true
 	} else if recAct == "change_pw" {
