@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -144,12 +145,15 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 		currentUser.Email = rec.Email
 		currentUser.Url = rec.Url
 		currentUser.About = rec.About
-		rec.IgnoreNode = strings.ReplaceAll(rec.IgnoreNode, " ", "")
-		rec.IgnoreNode = strings.ReplaceAll(rec.IgnoreNode, "，", ",")
-		currentUser.IgnoreNode = rec.IgnoreNode
-		rec.IgnoreUser = strings.ReplaceAll(rec.IgnoreUser, " ", "")
-		rec.IgnoreUser = strings.ReplaceAll(rec.IgnoreUser, "，", ",")
-		currentUser.IgnoreUser = rec.IgnoreUser
+
+		reg := regexp.MustCompile("[0-9]+")
+
+		nodes := reg.FindAllString(rec.IgnoreNode, -1)
+		currentUser.IgnoreNode = strings.Join(nodes[:], ",")
+
+		users := reg.FindAllString(rec.IgnoreUser, -1)
+		currentUser.IgnoreUser = strings.Join(users[:], ",")
+
 		isChanged = true
 	} else if recAct == "change_pw" {
 		if len(rec.Password0) == 0 || len(rec.Password) == 0 {
