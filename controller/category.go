@@ -1,11 +1,13 @@
 package controller
 
 import (
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/ego008/youdb"
-	"goji.io/pat"
 	"net/http"
 	"strconv"
+	"strings"
+
+	"github.com/ego008/youdb"
+	"github.com/terminus2049/2049bbs/model"
+	"goji.io/pat"
 )
 
 func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
@@ -59,6 +61,24 @@ func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
 		PageData
 		Cobj     model.Category
 		PageInfo model.ArticlePageInfo
+	}
+
+	if currentUser.IgnoreUser != "" {
+		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
+			uid, err := strconv.Atoi(uid)
+
+			if err != nil {
+				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				return
+			}
+
+			for i := 0; i < len(pageInfo.Items); i++ {
+				if pageInfo.Items[i].Uid == uint64(uid) {
+					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
+					i--
+				}
+			}
+		}
 	}
 
 	tpl := h.CurrentTpl(r)
