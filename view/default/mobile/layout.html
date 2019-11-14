@@ -192,19 +192,6 @@
 {{ end }}
 {{ end }}
 
-{{if .HotNodes}}
-<div class="nav-title">热门主题</div>
-<div class="main-box main-box-node">
-    <div class="btn">
-        {{range $_, $v := .HotNodes}}
-        <a href="/n/{{$v.Id}}">{{$v.Name}}</a>
-        {{end}}
-        <div class="c"></div>
-    </div>
-    <div class="c"></div>
-</div>
-{{ end }}
-
 {{if eq .PageName "home"}}
 {{if .Links}}
 <div class="nav-title">链接</div>

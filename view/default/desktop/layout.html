@@ -183,7 +183,7 @@
 
 {{if .HotNodes}}
 <div class="sider-box">
-    <div class="sider-box-title">热门主题</div>
+    <div class="sider-box-title">节点</div>
     <div class="sider-box-content">
         <div class="btn">
             {{range $_, $v := .HotNodes}}
@@ -207,20 +207,6 @@
 {{ end }}
 {{ end }}
 
-
-{{if .NewestNodes}}
-<div class="sider-box">
-    <div class="sider-box-title">新增主题</div>
-    <div class="sider-box-content">
-        <div class="btn">
-            {{range $_, $v := .NewestNodes}}
-            <a href="/n/{{$v.Id}}">{{$v.Name}}</a>
-            {{end}}
-        </div>
-        <div class="c"></div>
-    </div>
-</div>
-{{ end }}
 
 {{if eq .PageName "home"}}
 {{if .Links}}
