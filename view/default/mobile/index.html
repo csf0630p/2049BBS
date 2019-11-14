@@ -13,7 +13,7 @@
 <div class="main-box home-box-list">
 
      {{range $_, $item := .PageInfo.Items}}
-     {{if and (ne .Cobj.Name "时政") (ne .Cobj.Name "水")}}
+     {{if and (ne $item.Cname "时政") (ne $item.Cname "水")}}
     <div class="post-list">
         <div class="item-avatar">
             <a href="/member/{{$item.Uid}}">
