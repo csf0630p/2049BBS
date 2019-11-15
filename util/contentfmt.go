@@ -3,22 +3,24 @@ package util
 import (
 	// "crypto/md5"
 	// "encoding/hex"
-	"github.com/ego008/youdb"
 	"regexp"
+
+	"github.com/ego008/youdb"
 	// "strconv"
 	"strings"
+
 	"github.com/shurcooL/github_flavored_markdown"
 )
 
 var (
 	// codeRegexp    = regexp.MustCompile("(?s:```(.+?)```)")
 	// imgRegexp     = regexp.MustCompile(`(https?://[\w./:]+/[\w./]+\.(jpg|jpe|jpeg|gif|png))`)
-	gistRegexp    = regexp.MustCompile(`(https?://gist\.github\.com/([a-zA-Z0-9-]+/)?[\d]+)`)
+	// gistRegexp    = regexp.MustCompile(`(https?://gist\.github\.com/([a-zA-Z0-9-]+/)?[\d]+)`)
 	mentionRegexp = regexp.MustCompile(`(?:\s|^)@([a-zA-Z0-9\p{Han}]{1,32})\s?`)
 	// urlRegexp     = regexp.MustCompile(`([^;"='>])(https?://[^\s<]+[^\s<.)])`)
 	// nlineRegexp   = regexp.MustCompile(`\s{2,}`)
-	youku1Regexp  = regexp.MustCompile(`https?://player\.youku\.com/player\.php/sid/([a-zA-Z0-9=]+)/v\.swf`)
-	youku2Regexp  = regexp.MustCompile(`https?://v\.youku\.com/v_show/id_([a-zA-Z0-9=]+)(/|\.html?)?`)
+	// youku1Regexp = regexp.MustCompile(`https?://player\.youku\.com/player\.php/sid/([a-zA-Z0-9=]+)/v\.swf`)
+	// youku2Regexp = regexp.MustCompile(`https?://v\.youku\.com/v_show/id_([a-zA-Z0-9=]+)(/|\.html?)?`)
 )
 
 // 文本格式化
@@ -71,16 +73,16 @@ func ContentRich(db *youdb.DB, input string) string {
 
 	// video
 	// youku
-	if strings.Index(input, "player.youku.com") >= 0 {
-		input = youku1Regexp.ReplaceAllString(input, `<embed src="https://player.youku.com/player.php/sid/$1/v.swf" quality="high" width="590" height="492" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>`)
-	}
-	if strings.Index(input, "v.youku.com") >= 0 {
-		input = youku2Regexp.ReplaceAllString(input, `<embed src="https://player.youku.com/player.php/sid/$1/v.swf" quality="high" width="590" height="492" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>`)
-	}
+	// if strings.Index(input, "player.youku.com") >= 0 {
+	// 	input = youku1Regexp.ReplaceAllString(input, `<embed src="https://player.youku.com/player.php/sid/$1/v.swf" quality="high" width="590" height="492" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>`)
+	// }
+	// if strings.Index(input, "v.youku.com") >= 0 {
+	// 	input = youku2Regexp.ReplaceAllString(input, `<embed src="https://player.youku.com/player.php/sid/$1/v.swf" quality="high" width="590" height="492" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash"></embed>`)
+	// }
 
-	if strings.Index(input, "://gist") >= 0 {
-		input = gistRegexp.ReplaceAllString(input, `<script src="$1.js"></script>`)
-	}
+	// if strings.Index(input, "://gist") >= 0 {
+	// 	input = gistRegexp.ReplaceAllString(input, `<script src="$1.js"></script>`)
+	// }
 	if strings.Index(input, "@") >= 0 {
 		input = mentionRegexp.ReplaceAllString(input, ` @<a href="/member/$1">$1</a> `)
 	}
