@@ -118,6 +118,9 @@
             {{end}}
 
             {{end}}
+
+            {{ template "content" . }}
+
             {{if .HotNodes}}
             <div class="main-box main-box-node">
                 <div class="btn">
@@ -129,8 +132,6 @@
                 <div class="c"></div>
             </div>
             {{ end }}
-
-            {{ template "content" . }}
 
             {{ template "side" . }}
 

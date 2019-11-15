@@ -86,6 +86,19 @@ p code {
     font-size: 85%;
 }
 
+.nav_btn {
+  border: none;
+  outline: none;
+  padding: 5px 8px;
+  cursor: pointer;
+}
+
+.nav_btn:hover, .active{
+  background-color: #334;
+  border-radius: 3px;
+  color: white !important;
+}
+
 html {height: 100%;}
 body {padding: 0px;margin: 0px;font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", STHeiti !important;background-color: #fff;}
 

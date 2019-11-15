@@ -1,8 +1,19 @@
 {{ define "content" }}
 
 <div class="nav-title">
-    <div class="float-left fs14">
-        &raquo; {{.Cobj.Name}} ({{.Cobj.Articles}})
+    <div class="float-left fs14" id="nav">
+          <a class="nav_btn" href="/">首页</a>
+          {{if eq .Cobj.Name "时政"}}
+          <a class="nav_btn active" href="/n/2">时政</a>
+          <a class="nav_btn" href="/n/4">水</a>
+          {{else if eq .Cobj.Name "水"}}
+          <a class="nav_btn" href="/n/2">时政</a>
+          <a class="nav_btn active" href="/n/4">水</a>
+          {{else}}
+          <a class="nav_btn" href="/n/2">时政</a>
+          <a class="nav_btn" href="/n/4">水</a>
+          <a class="nav_btn active" href="/n/4">{{.Cobj.Name}}</a>
+          {{end}}
         {{if ge .CurrentUser.Flag 99}}
         &nbsp;&nbsp;&nbsp; Hidden is {{.Cobj.Hidden}}• <a href="/admin/category/list?cid={{.Cobj.Id}}">编辑</a>
         {{end}}
@@ -58,4 +69,3 @@
 </div>
 
 {{ end}}
-
