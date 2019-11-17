@@ -58,19 +58,10 @@
             {{if .CurrentUser.Id}}
             <a href="/member/{{.CurrentUser.Id}}"><img class="avatar avatar24" src="/static/avatar/{{.CurrentUser.Avatar}}.jpg" alt="{{.CurrentUser.Name}}"/></a>&nbsp;&nbsp;<a href="/setting">设置</a>&nbsp;&nbsp;<a href="/logout">退出</a>
             {{else}}
-            {{if .SiteCf.WeiboClientID}}
-            <a href="/wblogin" rel="nofollow"><img src="/static/img/weibo_login_55_24.png" alt="微博登录"/></a>
-            {{end}}
-            {{if .SiteCf.QQClientID}}
-            <a href="/qqlogin" rel="nofollow"><img src="/static/img/qq_login_55_24.png" alt="QQ登录"/></a>
-            {{end}}
             &nbsp;<a href="/login" rel="nofollow">登录</a>
 
-            {{if and .SiteCf.WeiboClientID .SiteCf.QQClientID}}
-            {{else}}
             {{if not .SiteCf.CloseReg}}
             &nbsp;&nbsp;<a href="/register" rel="nofollow">注册</a>
-            {{end}}
             {{end}}
 
             {{end}}

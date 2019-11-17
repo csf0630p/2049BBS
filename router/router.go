@@ -22,7 +22,6 @@ func NewRouter(app *system.Application) *goji.Mux {
 	sp.HandleFunc(pat.Get("/n/:cid"), h.CategoryDetail)
 	sp.HandleFunc(pat.Get("/member/:uid"), h.UserDetail)
 	sp.HandleFunc(pat.Get("/tag/:tag"), h.TagDetail)
-	sp.HandleFunc(pat.Get("/search"), h.SearchDetail)
 
 	sp.HandleFunc(pat.Get("/logout"), h.UserLogout)
 	sp.HandleFunc(pat.Get("/notification"), h.UserNotification)
@@ -40,11 +39,6 @@ func NewRouter(app *system.Application) *goji.Mux {
 	sp.HandleFunc(pat.Post("/login"), h.UserLoginPost)
 	sp.HandleFunc(pat.Get("/register"), h.UserLogin)
 	sp.HandleFunc(pat.Post("/register"), h.UserLoginPost)
-
-	sp.HandleFunc(pat.Get("/qqlogin"), h.QQOauthHandler)
-	sp.HandleFunc(pat.Get("/oauth/qq/callback"), h.QQOauthCallback)
-	sp.HandleFunc(pat.Get("/wblogin"), h.WeiboOauthHandler)
-	sp.HandleFunc(pat.Get("/oauth/wb/callback"), h.WeiboOauthCallback)
 
 	sp.HandleFunc(pat.Post("/content/preview"), h.ContentPreviewPost)
 	sp.HandleFunc(pat.Post("/file/upload"), h.FileUpload)
