@@ -16,11 +16,6 @@
     <p><textarea id="id-content" name="content" class="mll tall wb96" autocomplete="off">{{.Aobj.Content}}</textarea></p>
     <p><input id="id-tags" type="text" value="{{.Aobj.Tags}}" class="sll wb96" /></p>
 
-    <div class="float-right grey fs12">
-        <input id="file_upload" name="file_upload" type="file" multiple="true">
-        <div id="file-queue"></div>
-        <div class="c"></div>
-    </div>
     <div class="c"></div>
 
     <p>
@@ -28,10 +23,13 @@
         •  <label><a href="/admin/post/edit/{{.Aobj.Id}}?act=del" onclick="javascript:return confirm('您确定要删除吗?')">永久删除帖子</a></label>
     </p>
 
-    <p><div class="float-left">
-        <input id="btn-preview" type="button" value=" 预 览 " name="submit" class="textbtn" />
-        <input id="btn-submit" type="submit" value=" 提 交 " name="submit" class="textbtn" />
-    </div><div class="c"></div></p>
+    <p>
+        <div class="float-left">
+            <input id="btn-preview" type="button" value=" 预 览 " name="submit" class="textbtn" />
+            <input id="btn-submit" type="submit" value=" 提 交 " name="submit" class="textbtn" />
+        </div>
+        <div class="c"></div>
+    </p>
 
     <div id="id_preview" class="topic-content"></div>
 
@@ -106,39 +104,6 @@
         return false;
     }
 
-    $(function() {
-        $('#file_upload').uploadifive({
-            'auto': true,
-            'queueID': 'file-queue',
-            'checkScript': false,
-            'fileSizeLimit': {{.SiteCf.UploadMaxSizeByte}},
-            'multi': true,
-            'uploadLimit': 10,
-            'queueSizeLimit': 10,
-            'buttonText': "上传文件",
-            'fileType': false,
-            'fileObjName': 'file',
-            'removeCompleted': true,
-            'truncateLength': 30,
-            'height': 22,
-            'width': 80,
-            'uploadScript': '/file/upload',
-            'onUploadComplete': function (file, data) {
-                console.log(file);
-                var rsp = jQuery.parseJSON(data);
-                if(rsp.retcode == 200) {
-                    var con = document.getElementById("id-content").value;
-                    document.getElementsByTagName("textarea")[0].focus();
-                    document.getElementById("id-content").value = con + "\n"+rsp.url+"\n";
-                }else{
-                    $.toast(rsp.retmsg);
-                }
-            },
-            'onError': function (errorType) {
-                $.toast('The error was: ' + errorType);
-            }
-        });
-    });
 </script>
 
 

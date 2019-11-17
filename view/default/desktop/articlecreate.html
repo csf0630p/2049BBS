@@ -25,7 +25,10 @@
     <p><div class="float-left">
         <input id="btn-preview" type="button" value=" 预 览 " name="submit" class="textbtn" />
         <input id="btn-submit" type="submit" value=" 发 表 " name="submit" class="textbtn" />
-    </div><div class="c"></div></p>
+    </div>
+    <div class="float-right fs12 grey">
+        • 支持<a href="https://2049bbs.xyz/t/8" target="_blank"> Markdown </a>格式，发言请遵循 <a href="https://2049bbs.xyz/t/1564" target="_blank">RFC</a> 规范。</div>
+    <div class="c"></div>
 
     <div id="id_preview" class="topic-content"></div>
 
@@ -99,41 +102,7 @@
         return false;
     }
 
-   // $(function() {
-   //     $('#file_upload').uploadifive({
-   //         'auto': true,
-   //         'queueID': 'file-queue',
-   //         'checkScript': false,
-   //         'fileSizeLimit': {{.SiteCf.UploadMaxSizeByte}},
-   //         'multi': true,
-   //         'uploadLimit': 10,
-   //         'queueSizeLimit': 10,
-   //         'buttonText': "上传文件",
-   //         'fileType': false,
-   //         'fileObjName': 'file',
-   //         'removeCompleted': true,
-   //         'truncateLength': 30,
-   //         'height': 22,
-   //         'width': 80,
-   //         'uploadScript': '/file/upload',
-   //         'onUploadComplete': function (file, data) {
-   //             console.log(file);
-   //             var rsp = jQuery.parseJSON(data);
-   //             if(rsp.retcode == 200) {
-   //                 var con = document.getElementById("id-content").value;
-   //                 document.getElementsByTagName("textarea")[0].focus();
-   //                 document.getElementById("id-content").value = con + "\n"+rsp.url+"\n";
-   //             }else{
-   //                 $.toast(rsp.retmsg);
-   //             }
-   //         },
-   //         'onError': function (errorType) {
-   //             $.toast('The error was: ' + errorType);
-   //         }
-   //     });
-   // });
 </script>
 
 
 {{ end}}
-
