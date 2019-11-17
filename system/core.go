@@ -9,7 +9,6 @@ import (
 
 	"github.com/ego008/youdb"
 	"github.com/gorilla/securecookie"
-	"github.com/qiniu/api.v7/storage"
 	"github.com/terminus2049/2049bbs/util"
 	"github.com/weint/config"
 )
@@ -58,14 +57,6 @@ type SiteConf struct {
 	UploadImgResize   bool
 	UploadMaxSize     int
 	UploadMaxSizeByte int64
-	QiniuAccessKey    string
-	QiniuSecretKey    string
-	QiniuDomain       string
-	QiniuBucket       string
-	UpyunDomain       string
-	UpyunBucket       string
-	UpyunUser         string
-	UpyunPw           string
 }
 
 type AppConf struct {
@@ -74,10 +65,9 @@ type AppConf struct {
 }
 
 type Application struct {
-	Cf     *AppConf
-	Db     *youdb.DB
-	Sc     *securecookie.SecureCookie
-	QnZone *storage.Zone
+	Cf *AppConf
+	Db *youdb.DB
+	Sc *securecookie.SecureCookie
 }
 
 func LoadConfig(filename string) *config.Engine {

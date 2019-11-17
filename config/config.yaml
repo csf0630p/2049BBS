@@ -37,11 +37,3 @@ Site:
     UploadImgOnly: false
     UploadImgResize: false
     UploadMaxSize: 50
-    QiniuAccessKey: ""
-    QiniuSecretKey: ""
-    QiniuDomain: ""
-    QiniuBucket: ""
-    UpyunDomain: ""
-    UpyunBucket: ""
-    UpyunUser: ""
-    UpyunPw: ""
