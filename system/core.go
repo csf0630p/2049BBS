@@ -4,13 +4,14 @@ import (
 	"log"
 	"runtime"
 
-	"github.com/terminus2049/2049bbs/util"
+	"net/url"
+	"strings"
+
 	"github.com/ego008/youdb"
 	"github.com/gorilla/securecookie"
 	"github.com/qiniu/api.v7/storage"
+	"github.com/terminus2049/2049bbs/util"
 	"github.com/weint/config"
-	"net/url"
-	"strings"
 )
 
 type MainConf struct {
@@ -52,10 +53,6 @@ type SiteConf struct {
 	AutoDataBackup    bool
 	AutoGetTag        bool
 	GetTagApi         string
-	QQClientID        int
-	QQClientSecret    string
-	WeiboClientID     int
-	WeiboClientSecret string // eg: "jpg,jpeg,gif,zip,pdf"
 	UploadSuffix      string
 	UploadImgOnly     bool
 	UploadImgResize   bool

@@ -4,15 +4,6 @@ import (
 	"context"
 	"crypto/tls"
 	"flag"
-	"github.com/terminus2049/2049bbs/cronjob"
-	"github.com/terminus2049/2049bbs/getold"
-	"github.com/terminus2049/2049bbs/router"
-	"github.com/terminus2049/2049bbs/system"
-	"github.com/xi2/httpgzip"
-	"goji.io"
-	"goji.io/pat"
-	"golang.org/x/crypto/acme/autocert"
-	"golang.org/x/net/http2"
 	"log"
 	"net/http"
 	"os"
@@ -21,29 +12,24 @@ import (
 	"strings"
 	"syscall"
 	"time"
+
+	"github.com/terminus2049/2049bbs/cronjob"
+	"github.com/terminus2049/2049bbs/router"
+	"github.com/terminus2049/2049bbs/system"
+	"github.com/xi2/httpgzip"
+	"goji.io"
+	"goji.io/pat"
+	"golang.org/x/crypto/acme/autocert"
+	"golang.org/x/net/http2"
 )
 
 func main() {
 	configFile := flag.String("config", "config/config.yaml", "full path of config.yaml file")
-	getOldSite := flag.String("getoldsite", "0", "get or not old site, 0 or 1, 2")
 	flag.Parse()
 
 	c := system.LoadConfig(*configFile)
 	app := &system.Application{}
 	app.Init(c, os.Args[0])
-
-	if *getOldSite == "1" || *getOldSite == "2" {
-		bh := &getold.BaseHandler{
-			App: app,
-		}
-		if *getOldSite == "1" {
-			bh.GetRemote()
-		} else if *getOldSite == "2" {
-			bh.GetLocal()
-		}
-		app.Close()
-		return
-	}
 
 	// cron job
 	cr := cronjob.BaseHandler{App: app}
@@ -120,8 +106,8 @@ func main() {
 			Handler:        httpgzip.NewHandler(root, nil),
 			TLSConfig:      tlsCf,
 			MaxHeaderBytes: int(app.Cf.Site.UploadMaxSizeByte),
-			ReadTimeout: 5 * time.Second,
-			WriteTimeout: 10 * time.Second,
+			ReadTimeout:    5 * time.Second,
+			WriteTimeout:   10 * time.Second,
 		}
 
 		go func() {
@@ -135,10 +121,10 @@ func main() {
 	} else {
 		// http
 		srv = &http.Server{
-			Addr: ":" + strconv.Itoa(mcf.HttpPort),
-			Handler: root,
-			ReadTimeout: 5 * time.Second,
-		  WriteTimeout: 10 * time.Second,
+			Addr:         ":" + strconv.Itoa(mcf.HttpPort),
+			Handler:      root,
+			ReadTimeout:  5 * time.Second,
+			WriteTimeout: 10 * time.Second,
 		}
 		go func() {
 			log.Fatal(srv.ListenAndServe())

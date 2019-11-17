@@ -33,10 +33,6 @@ Site:
     AutoDataBackup: false
     AutoGetTag: true
     GetTagApi: "http://youbbs.sinaapp.com/fencigoapi.php"
-    QQClientID: 0
-    QQClientSecret: ""
-    WeiboClientID: 0
-    WeiboClientSecret: ""
     UploadSuffix: ""
     UploadImgOnly: false
     UploadImgResize: false
