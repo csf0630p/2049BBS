@@ -204,7 +204,7 @@ func (h *BaseHandler) ArticleAddPost(w http.ResponseWriter, r *http.Request) {
 
 	// send task work
 	// get tag from title
-	if scf.AutoGetTag && len(scf.GetTagApi) > 0 {
+	if scf.AutoGetTag {
 		db.Hset("task_to_get_tag", aidB, []byte(rec.Title))
 	}
 

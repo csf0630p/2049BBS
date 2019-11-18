@@ -32,7 +32,6 @@ Site:
     CloseReg: false
     AutoDataBackup: true
     AutoGetTag: true
-    GetTagApi: "http://youbbs.sinaapp.com/fencigoapi.php"
     UploadSuffix: ""
     UploadImgOnly: false
     UploadImgResize: false

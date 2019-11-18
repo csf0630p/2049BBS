@@ -2,14 +2,15 @@ package cronjob
 
 import (
 	"encoding/json"
-	"github.com/boltdb/bolt"
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/system"
-	"github.com/ego008/youdb"
-	"github.com/weint/httpclient"
 	"os"
 	"strings"
 	"time"
+
+	"github.com/boltdb/bolt"
+	"github.com/ego008/youdb"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/system"
+	"github.com/wangbin/jiebago/analyse"
 )
 
 type BaseHandler struct {
@@ -20,7 +21,7 @@ func (h *BaseHandler) MainCronJob() {
 	db := h.App.Db
 	scf := h.App.Cf.Site
 	tick1 := time.Tick(3600 * time.Second)
-	tick2 := time.Tick(120 * time.Second)
+	tick2 := time.Tick(60 * time.Second)
 	tick3 := time.Tick(30 * time.Minute)
 	tick4 := time.Tick(31 * time.Second)
 	daySecond := int64(3600 * 24)
@@ -49,8 +50,8 @@ func (h *BaseHandler) MainCronJob() {
 			}
 
 		case <-tick2:
-			if scf.AutoGetTag && len(scf.GetTagApi) > 0 {
-				getTagFromTitle(db, scf.GetTagApi)
+			if scf.AutoGetTag {
+				getTagFromTitle(db)
 			}
 		case <-tick3:
 			if h.App.Cf.Site.AutoDataBackup {
@@ -75,7 +76,7 @@ func dataBackup(db *youdb.DB) {
 	}
 }
 
-func getTagFromTitle(db *youdb.DB, apiUrl string) {
+func getTagFromTitle(db *youdb.DB) {
 	rs := db.Hscan("task_to_get_tag", []byte(""), 1)
 	if rs.State == "ok" {
 		aidB := rs.Data[0][:]
@@ -92,46 +93,39 @@ func getTagFromTitle(db *youdb.DB, apiUrl string) {
 			return
 		}
 
-		hc := httpclient.NewHttpClientRequest("POST", apiUrl)
-		hc.Param("state", "ok")
-		hc.Param("ms", string(rs.Data[1]))
+		var t analyse.TagExtracter
+		t.LoadDictionary("../dict.txt")
+		t.LoadIdf("idf.txt")
+		t.LoadStopWords("./stop_words.txt")
 
-		t := struct {
-			Code int    `json:"code"`
-			Tag  string `json:"tag"`
-		}{}
-		err := hc.ReplyJson(&t)
-		if err != nil {
-			return
+		sentence := string(rs.Data[1])
+		segments := t.ExtractTags(sentence, 5)
+		tags := []string{}
+		for _, segment := range segments {
+			tags = append(tags, segment.Text())
 		}
-		if hc.Status() == 200 && t.Code == 200 {
-			if len(t.Tag) > 0 {
-				tags := strings.Split(t.Tag, ",")
-				if len(tags) > 5 {
-					tags = tags[:5]
-				}
 
-				// get once more
-				rs2 := db.Hget("article", youdb.I2b(aobj.Id))
-				if rs2.State == "ok" {
-					aobj := model.Article{}
-					json.Unmarshal(rs2.Data[0], &aobj)
-					aobj.Tags = strings.Join(tags, ",")
-					jb, _ := json.Marshal(aobj)
-					db.Hset("article", youdb.I2b(aobj.Id), jb)
+		// get once more
+		rs2 = db.Hget("article", youdb.I2b(aobj.Id))
+		if rs2.State == "ok" {
+			aobj := model.Article{}
+			json.Unmarshal(rs2.Data[0], &aobj)
+			aobj.Tags = strings.Join(tags, ",")
+			jb, _ := json.Marshal(aobj)
+			db.Hset("article", youdb.I2b(aobj.Id), jb)
 
-					// tag send task work，自动处理tag与文章id
-					at := model.ArticleTag{
-						Id:      aobj.Id,
-						OldTags: "",
-						NewTags: aobj.Tags,
-					}
-					jb, _ = json.Marshal(at)
-					db.Hset("task_to_set_tag", youdb.I2b(at.Id), jb)
-				}
+			// tag send task work，自动处理tag与文章id
+			at := model.ArticleTag{
+				Id:      aobj.Id,
+				OldTags: "",
+				NewTags: aobj.Tags,
 			}
-			db.Hdel("task_to_get_tag", aidB)
+			jb, _ = json.Marshal(at)
+			db.Hset("task_to_set_tag", youdb.I2b(at.Id), jb)
 		}
+
+		db.Hdel("task_to_get_tag", aidB)
+
 	}
 }
 
