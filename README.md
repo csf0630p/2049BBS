@@ -5,13 +5,16 @@
 安装 [go](https://golang.org/dl/)，然后 clone 本仓库。
 
 ```bash
-git clone https://github.com/Terminus2049/2049BBS.git
-cd 2049BBS
-go get github.com/terminus2049/2049bbs
+go get -v github.com/terminus2049/2049bbs
+```
+
+然后 cd 到相应目录，一般是 `go/src/github.com/terminus2049/2049bbs`。
+
+```bash
 go run main.go
 ```
 
-然后在浏览器打开 `127.0.0.1/` 即可，或者直接编译，运行 `sudo ./goyoubbs`，
+然后在浏览器打开 `127.0.0.1:8082` 即可，或者直接编译，运行 `sudo ./2049bbs`，
 
 ## 部署
 
