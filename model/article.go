@@ -6,7 +6,6 @@ import (
 	"html"
 	"sort"
 	"strings"
-	"time"
 
 	"github.com/ego008/youdb"
 	"github.com/terminus2049/2049bbs/util"
@@ -571,8 +570,8 @@ func ArticleFeedList(db *youdb.DB, limit, tz int) []ArticleFeedListItem {
 					Name:        user.Name,
 					Cname:       html.EscapeString(category.Name),
 					Title:       html.EscapeString(article.Title),
-					AddTimeFmt:  util.TimeFmt(article.AddTime, time.RFC3339, tz),
-					EditTimeFmt: util.TimeFmt(article.EditTime, time.RFC3339, tz),
+					AddTimeFmt:  util.TimeFmt(article.AddTime, "2006-01-02", tz),
+					EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				}
 
 				contentRune := []rune(article.Content)
@@ -662,8 +661,8 @@ func ArticleFeedCategoryList(db *youdb.DB, cid string, limit, tz int) []ArticleF
 					Name:        user.Name,
 					Cname:       html.EscapeString(category.Name),
 					Title:       html.EscapeString(article.Title),
-					AddTimeFmt:  util.TimeFmt(article.AddTime, time.RFC3339, tz),
-					EditTimeFmt: util.TimeFmt(article.EditTime, time.RFC3339, tz),
+					AddTimeFmt:  util.TimeFmt(article.AddTime, "2006-01-02", tz),
+					EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
 				}
 
 				contentRune := []rune(article.Content)
