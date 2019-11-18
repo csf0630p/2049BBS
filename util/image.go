@@ -3,14 +3,14 @@ package util
 import (
 	"bytes"
 	"errors"
-	"github.com/disintegration/imaging"
-	"github.com/o1egl/govatar"
 	"image"
 	"image/gif"
 	"image/jpeg"
 	"image/png"
 	"net/http"
 	"os"
+
+	"github.com/disintegration/imaging"
 )
 
 var imgTable = map[string]string{
@@ -92,18 +92,4 @@ func ImageResize(srcImg image.Image, w, h int) *image.NRGBA {
 		}
 	}
 	return imaging.Resize(srcImg, w, h, imaging.Lanczos)
-}
-
-func GenerateAvatar(sex, userName string, w, h int, filePath string) error {
-	var gender govatar.Gender
-	if sex == "male" {
-		gender = govatar.MALE
-	} else {
-		gender = govatar.FEMALE
-	}
-	img, err := govatar.GenerateForUsername(gender, userName)
-	if err != nil {
-		return err
-	}
-	return AvatarResize(img, w, h, filePath)
 }

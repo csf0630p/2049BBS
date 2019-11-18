@@ -2,14 +2,15 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/util"
-	"github.com/ego008/youdb"
-	"github.com/rs/xid"
+	"math/rand"
 	"net/http"
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/ego008/youdb"
+	"github.com/rs/xid"
+	"github.com/terminus2049/2049bbs/model"
 )
 
 func (h *BaseHandler) AdminUserList(w http.ResponseWriter, r *http.Request) {
@@ -133,13 +134,12 @@ func (h *BaseHandler) AdminUserListPost(w http.ResponseWriter, r *http.Request) 
 		LastLoginTime: timeStamp,
 	}
 
-	uidStr := strconv.FormatUint(userId, 10)
-	err = util.GenerateAvatar("male", rec.Name, 73, 73, "static/avatar/"+uidStr+".jpg")
-	if err != nil {
-		uobj.Avatar = "0"
-	} else {
-		uobj.Avatar = uidStr
-	}
+	rand.Seed(time.Now().UnixNano())
+	min := 2539
+	max := 2558
+	sampleID := rand.Intn(max-min+1) + min
+	uidStr := strconv.FormatUint(uint64(sampleID), 10)
+	uobj.Avatar = uidStr
 
 	jb, _ := json.Marshal(uobj)
 	db.Hset("user", youdb.I2b(uobj.Id), jb)
