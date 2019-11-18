@@ -8,8 +8,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/terminus2049/2049bbs/util"
 	"github.com/ego008/youdb"
+	"github.com/terminus2049/2049bbs/util"
 )
 
 type Article struct {
@@ -495,106 +495,6 @@ func ArticleNotificationList(db *youdb.DB, ids string, tz int) ArticlePageInfo {
 			}
 			if article.Ruid > 0 {
 				item.Rname = userMap[article.Ruid].Name
-			}
-			items = append(items, item)
-		}
-	}
-
-	return ArticlePageInfo{Items: items}
-}
-
-func ArticleSearchList(db *youdb.DB, where, kw string, limit, tz int) ArticlePageInfo {
-	var items []ArticleListItem
-
-	var aitems []Article
-	userMap := map[uint64]UserMini{}
-	categoryMap := map[uint64]CategoryMini{}
-
-	startKey := []byte("")
-	for {
-		rs := db.Hrscan("article", startKey, limit)
-		if rs.State == "ok" {
-			for i := 0; i < (len(rs.Data) - 1); i += 2 {
-				startKey = rs.Data[i]
-				aitem := Article{}
-				json.Unmarshal(rs.Data[i+1], &aitem)
-				if !aitem.Hidden {
-					var getIt bool
-					if where == "title" {
-						if strings.Index(strings.ToLower(aitem.Title), kw) >= 0 {
-							getIt = true
-						}
-					} else {
-						if strings.Index(strings.ToLower(aitem.Content), kw) >= 0 {
-							getIt = true
-						}
-					}
-					if getIt {
-						aitems = append(aitems, aitem)
-						userMap[aitem.Uid] = UserMini{}
-						if aitem.RUid > 0 {
-							userMap[aitem.RUid] = UserMini{}
-						}
-						categoryMap[aitem.Cid] = CategoryMini{}
-						if len(aitems) == limit {
-							break
-						}
-					}
-				}
-			}
-			if len(aitems) == limit {
-				break
-			}
-		} else {
-			break
-		}
-	}
-
-	if len(aitems) > 0 {
-		userKeys := make([][]byte, 0, len(userMap))
-		for k := range userMap {
-			userKeys = append(userKeys, youdb.I2b(k))
-		}
-		rs := db.Hmget("user", userKeys)
-		if rs.State == "ok" {
-			for i := 0; i < (len(rs.Data) - 1); i += 2 {
-				item := UserMini{}
-				json.Unmarshal(rs.Data[i+1], &item)
-				userMap[item.Id] = item
-			}
-		}
-
-		categoryKeys := make([][]byte, 0, len(categoryMap))
-		for k := range categoryMap {
-			categoryKeys = append(categoryKeys, youdb.I2b(k))
-		}
-		rs = db.Hmget("category", categoryKeys)
-		if rs.State == "ok" {
-			for i := 0; i < (len(rs.Data) - 1); i += 2 {
-				item := CategoryMini{}
-				json.Unmarshal(rs.Data[i+1], &item)
-				categoryMap[item.Id] = item
-			}
-		}
-
-		for _, article := range aitems {
-			user := userMap[article.Uid]
-			category := categoryMap[article.Cid]
-			item := ArticleListItem{
-				Id:          article.Id,
-				Uid:         article.Uid,
-				Name:        user.Name,
-				Avatar:      user.Avatar,
-				Cid:         article.Cid,
-				Cname:       category.Name,
-				Ruid:        article.RUid,
-				Title:       article.Title,
-				EditTime:    article.EditTime,
-				EditTimeFmt: util.TimeFmt(article.EditTime, "2006-01-02", tz),
-				Comments:    article.Comments,
-			}
-			if article.RUid > 0 {
-				item.Rname = userMap[article.RUid].Name
 			}
 			items = append(items, item)
 		}
