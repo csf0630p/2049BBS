@@ -276,10 +276,12 @@ func ArticleGetRelative(db *youdb.DB, aid uint64, tags string) ArticleRelative {
 		var akeys [][]byte
 		j := 0
 		for _, kv := range ss {
-			akeys = append(akeys, youdb.I2b(kv.Key))
-			j++
-			if j == getMax {
-				break
+			if kv.Key > 0 {
+				akeys = append(akeys, youdb.I2b(kv.Key))
+				j++
+				if j == getMax {
+					break
+				}
 			}
 		}
 
