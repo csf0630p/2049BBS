@@ -246,7 +246,7 @@ func ArticleGetRelative(db *youdb.DB, aid uint64, tags string) ArticleRelative {
 		if rs.State == "ok" {
 			for i := 0; i < len(rs.Data)-1; i += 2 {
 				aid2 := youdb.B2i(rs.Data[i])
-				if aid2 != aid {
+				if aid2 > 0 && aid2 != aid {
 					if _, ok := aidCount[aid2]; ok {
 						aidCount[aid2] += 1
 					} else {
@@ -276,12 +276,10 @@ func ArticleGetRelative(db *youdb.DB, aid uint64, tags string) ArticleRelative {
 		var akeys [][]byte
 		j := 0
 		for _, kv := range ss {
-			if kv.Key > 0 {
-				akeys = append(akeys, youdb.I2b(kv.Key))
-				j++
-				if j == getMax {
-					break
-				}
+			akeys = append(akeys, youdb.I2b(kv.Key))
+			j++
+			if j == getMax {
+				break
 			}
 		}
 
@@ -291,9 +289,12 @@ func ArticleGetRelative(db *youdb.DB, aid uint64, tags string) ArticleRelative {
 			for i := 0; i < len(rs.Data)-1; i += 2 {
 				item := ArticleLi{}
 				json.Unmarshal(rs.Data[i+1], &item)
+				if item.Id == 0 {
+					continue
+				}
 				aitems = append(aitems, item)
 				for _, tag := range strings.Split(strings.ToLower(item.Tags), ",") {
-					if _, ok := ctagMap[tag]; !ok {
+					if _, ok := ctagMap[tag]; !ok && len(tag) > 0 {
 						tmpMap[tag] = struct{}{}
 					}
 				}
