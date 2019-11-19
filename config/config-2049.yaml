@@ -6,7 +6,7 @@ Main:
     PubDir: "static"
     ViewDir: "view/default"
     Youdb: "mydata.db"
-    CookieSecure: false
+    CookieSecure: true
     CookieHttpOnly: true
     OldSiteDomain: ""
     TLSCrtFile: "certs/cloudflare.pem"
