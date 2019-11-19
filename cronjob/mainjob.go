@@ -10,7 +10,7 @@ import (
 	"github.com/ego008/youdb"
 	"github.com/terminus2049/2049bbs/model"
 	"github.com/terminus2049/2049bbs/system"
-	"github.com/wangbin/jiebago/analyse"
+	"github.com/yanyiwu/gojieba"
 )
 
 type BaseHandler struct {
@@ -93,17 +93,11 @@ func getTagFromTitle(db *youdb.DB) {
 			return
 		}
 
-		var t analyse.TagExtracter
-		t.LoadDictionary("../dict.txt")
-		t.LoadIdf("idf.txt")
-		t.LoadStopWords("./stop_words.txt")
+		x := gojieba.NewJieba()
+		defer x.Free()
 
-		sentence := string(rs.Data[1])
-		segments := t.ExtractTags(sentence, 5)
-		tags := []string{}
-		for _, segment := range segments {
-			tags = append(tags, segment.Text())
-		}
+		Title := string(rs.Data[1])
+		tags := x.Extract(Title, 5)
 
 		// get once more
 		rs2 = db.Hget("article", youdb.I2b(aobj.Id))
