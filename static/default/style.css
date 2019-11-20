@@ -236,6 +236,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .rel_list li{float:left;width:48%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:2px;line-height:1.2em;padding-left:0em;}
                 .rel_list li a {font-size:12px;color:#333;text-decoration: none;padding-left: 25px;background: url('img/dot.png') no-repeat 10px 6px;}
                 .rel_list li a:hover {color:#000;text-decoration: underline;}
+                .rel_list ol,ul {padding-left: 0em;}
 
         .main-sider {float:right;width:270px;font-size:12px;}
             .sider-box {border-bottom:1px solid #E2E2E2;margin-bottom:20px;border-radius:5px;box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);border-bottom: 2px solid #E2E2E9;background: #F3F4F6 url("img/bg_item.png") repeat-x bottom center;}
