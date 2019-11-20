@@ -47,7 +47,7 @@
         {{if .Relative.Articles}}
         <div class="has_adv">
             <h3>相关帖子：</h3>
-            <ul class="rel_list">
+            <ul class="rel_list" style="padding-left: 0em;">
                 {{range $_, $item := .Relative.Articles}}
                 <li><a href="/t/{{$item.Id}}" title="{{$item.Title}}">{{$item.Title}}</a></li>
                 {{end}}
