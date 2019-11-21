@@ -26,9 +26,6 @@ func (h *BaseHandler) MainCronJob() {
 	tick4 := time.Tick(31 * time.Second)
 	daySecond := int64(3600 * 24)
 
-	x := gojieba.NewJieba()
-	defer x.Free()
-
 	for {
 		select {
 		case <-tick1:
@@ -54,6 +51,8 @@ func (h *BaseHandler) MainCronJob() {
 
 		case <-tick2:
 			if scf.AutoGetTag {
+				x := gojieba.NewJieba()
+				defer x.Free()
 				getTagFromTitle(db, x)
 			}
 		case <-tick3:
