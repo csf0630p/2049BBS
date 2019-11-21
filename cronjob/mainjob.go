@@ -26,6 +26,9 @@ func (h *BaseHandler) MainCronJob() {
 	tick4 := time.Tick(31 * time.Second)
 	daySecond := int64(3600 * 24)
 
+	x := gojieba.NewJieba()
+	defer x.Free()
+
 	for {
 		select {
 		case <-tick1:
@@ -51,7 +54,7 @@ func (h *BaseHandler) MainCronJob() {
 
 		case <-tick2:
 			if scf.AutoGetTag {
-				getTagFromTitle(db)
+				getTagFromTitle(db, x)
 			}
 		case <-tick3:
 			if h.App.Cf.Site.AutoDataBackup {
@@ -76,7 +79,7 @@ func dataBackup(db *youdb.DB) {
 	}
 }
 
-func getTagFromTitle(db *youdb.DB) {
+func getTagFromTitle(db *youdb.DB, engin *gojieba.Jieba) {
 	rs := db.Hscan("task_to_get_tag", []byte(""), 1)
 	if rs.State == "ok" {
 		aidB := rs.Data[0][:]
@@ -93,11 +96,8 @@ func getTagFromTitle(db *youdb.DB) {
 			return
 		}
 
-		x := gojieba.NewJieba()
-		defer x.Free()
-
 		Title := string(rs.Data[1])
-		tags := x.Extract(Title, 5)
+		tags := engin.Extract(Title, 5)
 
 		// get once more
 		rs2 = db.Hget("article", youdb.I2b(aobj.Id))
