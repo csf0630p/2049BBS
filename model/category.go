@@ -3,9 +3,10 @@ package model
 import (
 	"encoding/json"
 	"errors"
-	"github.com/ego008/youdb"
 	"strconv"
 	"strings"
+
+	"github.com/ego008/youdb"
 )
 
 type Category struct {
@@ -53,7 +54,9 @@ func CategoryHot(db *youdb.DB, limit int) []CategoryMini {
 				for i := 0; i < len(rs2.Data)-1; i += 2 {
 					item := CategoryMini{}
 					json.Unmarshal(rs2.Data[i+1], &item)
-					items = append(items, item)
+					if item.Id != 19 {
+						items = append(items, item)
+					}
 				}
 			}
 		}
