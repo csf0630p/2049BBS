@@ -49,11 +49,6 @@ func (h *BaseHandler) ArticleAdd(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if cobj.Hidden {
-		w.Write([]byte(`{"retcode":403,"retmsg":"category is Hidden"}`))
-		return
-	}
-
 	type pageData struct {
 		PageData
 		Cobj      model.Category
@@ -155,17 +150,6 @@ func (h *BaseHandler) ArticleAddPost(w http.ResponseWriter, r *http.Request) {
 	}
 	if len(rec.Content) > scf.ContentMaxLen {
 		w.Write([]byte(`{"retcode":403,"retmsg":"ContentMaxLen limited"}`))
-		return
-	}
-
-	cobj, err := model.CategoryGetById(db, strconv.FormatUint(rec.Cid, 10))
-	if err != nil {
-		w.Write([]byte(`{"retcode":404,"retmsg":"` + err.Error() + `"}`))
-		return
-	}
-
-	if cobj.Hidden {
-		w.Write([]byte(`{"retcode":403,"retmsg":"category is Hidden"}`))
 		return
 	}
 
@@ -454,9 +438,9 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	if aobj.Hidden && currentUser.Flag < 99 {
+	if aobj.Hidden && currentUser.Flag < 1 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"retcode":404,"retmsg":"not found"}`))
+		w.Write([]byte(`{"retcode":404,"retmsg":"仅登录用户可见"}`))
 		return
 	}
 	cobj, err := model.CategoryGetById(db, strconv.FormatUint(aobj.Cid, 10))
@@ -465,9 +449,9 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if cobj.Hidden && currentUser.Flag < 99 {
+	if cobj.Hidden && currentUser.Flag < 1 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"retcode":404,"retmsg":"not found"}`))
+		w.Write([]byte(`{"retcode":404,"retmsg":"仅登录用户可见"}`))
 		return
 	}
 

@@ -49,9 +49,9 @@ func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
 
 	currentUser, _ := h.CurrentUser(w, r)
 
-	if cobj.Hidden && currentUser.Flag < 99 {
+	if cobj.Hidden && currentUser.Flag < 1 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"retcode":404,"retmsg":"not found"}`))
+		w.Write([]byte(`{"retcode":404,"retmsg":"仅登录用户可见"}`))
 		return
 	}
 	cobj.Articles = db.Zget("category_article_num", youdb.I2b(cobj.Id)).Uint64()
