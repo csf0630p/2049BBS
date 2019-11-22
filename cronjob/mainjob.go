@@ -26,6 +26,16 @@ func (h *BaseHandler) MainCronJob() {
 	tick4 := time.Tick(31 * time.Second)
 	daySecond := int64(3600 * 24)
 
+	// 推荐使用 youbbs 的在线 api，请参考
+	// https://github.com/ego008/goyoubbs/blob/master/cronjob/mainjob.go
+
+	// 如果不使用 tag 功能，即 scf.AutoGetTag 为 false，或者如果想每调用一次重新载入+释放，
+	// 可以把 gojieba 的语句移入 getTagFromTitle 函数
+	// 相关讨论 https://github.com/Terminus2049/2049BBS/commit/45c5ad8275eef3214690a299ec6ce917a127754d
+
+	x := gojieba.NewJieba()
+	defer x.Free()
+
 	for {
 		select {
 		case <-tick1:
@@ -51,8 +61,6 @@ func (h *BaseHandler) MainCronJob() {
 
 		case <-tick2:
 			if scf.AutoGetTag {
-				x := gojieba.NewJieba()
-				defer x.Free()
 				getTagFromTitle(db, x)
 			}
 		case <-tick3:
