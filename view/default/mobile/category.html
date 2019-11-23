@@ -12,7 +12,7 @@
           {{else}}
           <a class="nav_btn" href="/n/2">时政</a>
           <a class="nav_btn" href="/n/4">水</a>
-          <a class="nav_btn active" href="/n/4">{{.Cobj.Name}}</a>
+          <a class="nav_btn active" href="/n/{{.Cobj.Id}}">{{.Cobj.Name}}</a>
           {{end}}
         {{if ge .CurrentUser.Flag 99}}
         &nbsp;&nbsp;&nbsp; Hidden is {{.Cobj.Hidden}}• <a href="/admin/category/list?cid={{.Cobj.Id}}">编辑</a>

@@ -12,7 +12,7 @@
         {{else}}
         <a class="nav_btn" href="/n/2">时政</a>
         <a class="nav_btn" href="/n/4">水</a>
-        <a class="nav_btn active" href="/n/4">{{.Cobj.Name}}</a>
+        <a class="nav_btn active" href="/n/{{.Cobj.Id}}">{{.Cobj.Name}}</a>
         {{end}}
     </div>
     {{if ge .CurrentUser.Flag 5}}
