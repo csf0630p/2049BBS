@@ -150,6 +150,7 @@ func ArticleList(db *youdb.DB, cmd, tb, key, score string, limit, tz int, ignore
 					for i := 0; i < len(aitems); i++ {
 						if aitems[i].Cid == uint64(node) {
 							aitems = append(aitems[:i], aitems[i+1:]...)
+							i--
 						}
 					}
 				}
