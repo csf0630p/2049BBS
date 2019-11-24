@@ -36,6 +36,7 @@ type SiteConf struct {
 	AdminEmail        string
 	MainDomain        string // 上传图片后添加网址前缀, eg: http://domian.com 、http://234.21.35.89:8082
 	MainNodeIds       string
+	MustLoginNodes    string
 	TimeZone          int
 	HomeShowNum       int
 	PageShowNum       int

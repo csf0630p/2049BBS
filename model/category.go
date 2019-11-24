@@ -40,7 +40,7 @@ func CategoryGetById(db *youdb.DB, cid string) (Category, error) {
 	return obj, errors.New(rs.State)
 }
 
-func CategoryHot(db *youdb.DB, limit int) []CategoryMini {
+func CategoryHot(db *youdb.DB, limit int, hide string) []CategoryMini {
 	var items []CategoryMini
 	rs := db.Zrscan("category_article_num", []byte(""), []byte(""), limit)
 	if rs.State == "ok" {
@@ -54,13 +54,25 @@ func CategoryHot(db *youdb.DB, limit int) []CategoryMini {
 				for i := 0; i < len(rs2.Data)-1; i += 2 {
 					item := CategoryMini{}
 					json.Unmarshal(rs2.Data[i+1], &item)
-					if item.Id != 19 {
-						items = append(items, item)
+					items = append(items, item)
+				}
+			}
+		}
+	}
+
+	if len(hide) > 0 {
+		for _, node := range strings.Split(hide, ",") {
+			node, err := strconv.Atoi(node)
+			if err == nil {
+				for i := 0; i < len(items); i++ {
+					if items[i].Id == uint64(node) {
+						items = append(items[:i], items[i+1:]...)
 					}
 				}
 			}
 		}
 	}
+
 	return items
 }
 

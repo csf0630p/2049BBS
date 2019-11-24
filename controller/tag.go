@@ -1,11 +1,12 @@
 package controller
 
 import (
-	"github.com/terminus2049/2049bbs/model"
-	"goji.io/pat"
 	"net/http"
 	"strconv"
 	"strings"
+
+	"github.com/terminus2049/2049bbs/model"
+	"goji.io/pat"
 )
 
 func (h *BaseHandler) TagDetail(w http.ResponseWriter, r *http.Request) {
@@ -60,7 +61,7 @@ func (h *BaseHandler) TagDetail(w http.ResponseWriter, r *http.Request) {
 	evn.CurrentUser = currentUser
 	evn.ShowSideAd = true
 	evn.PageName = "category_detail"
-	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum)
+	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodes)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	evn.Tag = tagDetail{
