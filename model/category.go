@@ -67,6 +67,7 @@ func CategoryHot(db *youdb.DB, limit int, hide string) []CategoryMini {
 				for i := 0; i < len(items); i++ {
 					if items[i].Id == uint64(node) {
 						items = append(items[:i], items[i+1:]...)
+						i--
 					}
 				}
 			}
