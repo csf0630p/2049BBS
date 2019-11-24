@@ -76,19 +76,6 @@ func CategoryHot(db *youdb.DB, limit int, hide string) []CategoryMini {
 	return items
 }
 
-func CategoryNewest(db *youdb.DB, limit int) []CategoryMini {
-	var items []CategoryMini
-	rs := db.Hrscan("category", []byte(""), limit)
-	if rs.State == "ok" {
-		for i := 0; i < len(rs.Data)-1; i += 2 {
-			item := CategoryMini{}
-			json.Unmarshal(rs.Data[i+1], &item)
-			items = append(items, item)
-		}
-	}
-	return items
-}
-
 func CategoryGetMain(db *youdb.DB, currentCobj Category) []CategoryMini {
 	var items []CategoryMini
 	item := CategoryMini{

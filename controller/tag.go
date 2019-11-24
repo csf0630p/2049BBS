@@ -62,7 +62,6 @@ func (h *BaseHandler) TagDetail(w http.ResponseWriter, r *http.Request) {
 	evn.ShowSideAd = true
 	evn.PageName = "category_detail"
 	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
-	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	evn.Tag = tagDetail{
 		Name:   tag,

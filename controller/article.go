@@ -337,7 +337,6 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 	evn.ShowSideAd = true
 	evn.PageName = "home"
 	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
-	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	if currentUser.IgnoreNode != "" {
 		for _, node := range strings.Split(currentUser.IgnoreNode, ",") {
@@ -516,7 +515,6 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 	evn.ShowSideAd = true
 	evn.PageName = "article_detail"
 	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
-	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	author, _ := model.UserGetById(db, aobj.Uid)
 	viewsNum, _ := db.Hincr("article_views", youdb.I2b(aobj.Id), 1)
