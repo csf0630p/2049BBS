@@ -204,7 +204,7 @@ func (h *BaseHandler) UserNotification(w http.ResponseWriter, r *http.Request) {
 	evn.CurrentUser = currentUser
 	evn.ShowSideAd = true
 	evn.PageName = "user_notification"
-	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodes)
+	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	evn.PageInfo = model.ArticleNotificationList(db, currentUser.Notice, scf.TimeZone)
@@ -327,7 +327,7 @@ func (h *BaseHandler) UserDetail(w http.ResponseWriter, r *http.Request) {
 	evn.CurrentUser = currentUser
 	evn.ShowSideAd = true
 	evn.PageName = "category_detail"
-	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodes)
+	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	evn.Act = act

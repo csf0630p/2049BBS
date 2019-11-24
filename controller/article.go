@@ -336,7 +336,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 	evn.CurrentUser = currentUser
 	evn.ShowSideAd = true
 	evn.PageName = "home"
-	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodes)
+	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	if currentUser.IgnoreNode != "" {
@@ -515,7 +515,7 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 	evn.CurrentUser = currentUser
 	evn.ShowSideAd = true
 	evn.PageName = "article_detail"
-	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodes)
+	evn.HotNodes = model.CategoryHot(db, scf.CategoryShowNum, scf.MustLoginNodeIds)
 	evn.NewestNodes = model.CategoryNewest(db, scf.CategoryShowNum)
 
 	author, _ := model.UserGetById(db, aobj.Uid)
