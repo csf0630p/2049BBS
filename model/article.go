@@ -5,6 +5,7 @@ import (
 	"errors"
 	"html"
 	"sort"
+	"strconv"
 	"strings"
 
 	"github.com/ego008/youdb"
@@ -102,7 +103,7 @@ func ArticleGetById(db *youdb.DB, aid string) (Article, error) {
 	return obj, errors.New(rs.State)
 }
 
-func ArticleList(db *youdb.DB, cmd, tb, key, score string, limit, tz int) ArticlePageInfo {
+func ArticleList(db *youdb.DB, cmd, tb, key, score string, limit, tz int, ignorenodes string) ArticlePageInfo {
 	var items []ArticleListItem
 	var keys [][]byte
 	var hasPrev, hasNext bool
@@ -138,13 +139,29 @@ func ArticleList(db *youdb.DB, cmd, tb, key, score string, limit, tz int) Articl
 				json.Unmarshal(rs.Data[i+1], &item)
 				if !item.Hidden {
 					aitems = append(aitems, item)
-					userMap[item.Uid] = UserMini{}
-					if item.Ruid > 0 {
-						userMap[item.Ruid] = UserMini{}
-					}
-					categoryMap[item.Cid] = CategoryMini{}
 				}
 			}
+		}
+
+		if len(ignorenodes) > 0 {
+			for _, node := range strings.Split(ignorenodes, ",") {
+				node, err := strconv.Atoi(node)
+				if err == nil {
+					for i := 0; i < len(aitems); i++ {
+						if aitems[i].Cid == uint64(node) {
+							aitems = append(aitems[:i], aitems[i+1:]...)
+						}
+					}
+				}
+			}
+		}
+
+		for _, item := range aitems {
+			userMap[item.Uid] = UserMini{}
+			if item.Ruid > 0 {
+				userMap[item.Ruid] = UserMini{}
+			}
+			categoryMap[item.Cid] = CategoryMini{}
 		}
 
 		userKeys := make([][]byte, 0, len(userMap))

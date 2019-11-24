@@ -55,7 +55,7 @@ func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	cobj.Articles = db.Zget("category_article_num", youdb.I2b(cobj.Id)).Uint64()
-	pageInfo := model.ArticleList(db, cmd, "category_article_timeline:"+cid, key, score, scf.HomeShowNum, scf.TimeZone)
+	pageInfo := model.ArticleList(db, cmd, "category_article_timeline:"+cid, key, score, scf.HomeShowNum, scf.TimeZone, scf.NotHomeNodeIds)
 
 	type pageData struct {
 		PageData

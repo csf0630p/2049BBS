@@ -261,7 +261,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 
 	db := h.App.Db
 	scf := h.App.Cf.Site
-	pageInfo := model.ArticleList(db, cmd, "article_timeline", key, score, scf.HomeShowNum, scf.TimeZone)
+	pageInfo := model.ArticleList(db, cmd, "article_timeline", key, score, scf.HomeShowNum, scf.TimeZone, scf.NotHomeNodeIds)
 
 	type siteInfo struct {
 		Days     int

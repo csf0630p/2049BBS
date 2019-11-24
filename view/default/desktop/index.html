@@ -14,7 +14,6 @@
 
 <div class="main-box home-box-list">
     {{range $_, $item := .PageInfo.Items}}
-    {{if and (ne $item.Cname "水") (ne $item.Cname "时政") (ne $item.Cname "树洞")}}
     <div class="post-list">
         <div class="item-avatar">
             <a href="/member/{{$item.Uid}}">
@@ -34,7 +33,6 @@
         {{end}}
         <div class="c"></div>
     </div>
-    {{end}}
     {{end}}
 
 
