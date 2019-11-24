@@ -65,7 +65,7 @@ func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
 
 	if currentUser.IgnoreUser != "" {
 		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
-			uid, err := strconv.Atoi(uid)
+			uid, err := strconv.ParseUint(uid, 10, 64)
 
 			if err != nil {
 				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
@@ -73,7 +73,7 @@ func (h *BaseHandler) CategoryDetail(w http.ResponseWriter, r *http.Request) {
 			}
 
 			for i := 0; i < len(pageInfo.Items); i++ {
-				if pageInfo.Items[i].Uid == uint64(uid) {
+				if pageInfo.Items[i].Uid == uid {
 					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
 					i--
 				}

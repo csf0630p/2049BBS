@@ -340,7 +340,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 
 	if currentUser.IgnoreNode != "" {
 		for _, node := range strings.Split(currentUser.IgnoreNode, ",") {
-			node, err := strconv.Atoi(node)
+			node, err := strconv.ParseUint(node, 10, 64)
 
 			if err != nil {
 				w.Write([]byte(`{"retcode":400,"retmsg":"忽略节点id应为整数，请在设置中检查。"}`))
@@ -348,7 +348,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 			}
 
 			for i := 0; i < len(pageInfo.Items); i++ {
-				if pageInfo.Items[i].Cid == uint64(node) {
+				if pageInfo.Items[i].Cid == node {
 					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
 					i--
 				}
@@ -358,7 +358,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 
 	if currentUser.IgnoreUser != "" {
 		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
-			uid, err := strconv.Atoi(uid)
+			uid, err := strconv.ParseUint(uid, 10, 64)
 
 			if err != nil {
 				w.Write([]byte(`{"retcode":400,"retmsg":"忽略用户id应为整数，请在设置中检查。"}`))
@@ -366,7 +366,7 @@ func (h *BaseHandler) ArticleHomeList(w http.ResponseWriter, r *http.Request) {
 			}
 
 			for i := 0; i < len(pageInfo.Items); i++ {
-				if pageInfo.Items[i].Uid == uint64(uid) {
+				if pageInfo.Items[i].Uid == uid {
 					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
 					i--
 				}
@@ -466,7 +466,7 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 
 	if currentUser.IgnoreUser != "" {
 		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
-			uid, err := strconv.Atoi(uid)
+			uid, err := strconv.ParseUint(uid, 10, 64)
 
 			if err != nil {
 				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
@@ -474,7 +474,7 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 			}
 
 			for i := 0; i < len(pageInfo.Items); i++ {
-				if pageInfo.Items[i].Uid == uint64(uid) {
+				if pageInfo.Items[i].Uid == uid {
 					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
 					i--
 				}
