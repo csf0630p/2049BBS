@@ -62,10 +62,10 @@ func CategoryHot(db *youdb.DB, limit int, hide string) []CategoryMini {
 
 	if len(hide) > 0 {
 		for _, node := range strings.Split(hide, ",") {
-			node, err := strconv.Atoi(node)
+			node, err := strconv.ParseUint(node, 10, 64)
 			if err == nil {
 				for i := 0; i < len(items); i++ {
-					if items[i].Id == uint64(node) {
+					if items[i].Id == node {
 						items = append(items[:i], items[i+1:]...)
 						i--
 					}
