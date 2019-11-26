@@ -5,12 +5,19 @@
         <a class="nav_btn" href="/">首页</a>
         {{if eq .Cobj.Name "时政"}}
         <a class="nav_btn active" href="/n/2">时政</a>
+        <a class="nav_btn" href="/n/17">外段</a>
+        <a class="nav_btn" href="/n/4">水</a>
+        {{else if eq .Cobj.Name "外段"}}
+        <a class="nav_btn" href="/n/2">时政</a>
+        <a class="nav_btn active" href="/n/17">外段</a>
         <a class="nav_btn" href="/n/4">水</a>
         {{else if eq .Cobj.Name "水"}}
         <a class="nav_btn" href="/n/2">时政</a>
+        <a class="nav_btn" href="/n/17">外段</a>
         <a class="nav_btn active" href="/n/4">水</a>
         {{else}}
         <a class="nav_btn" href="/n/2">时政</a>
+        <a class="nav_btn" href="/n/17">外段</a>
         <a class="nav_btn" href="/n/4">水</a>
         <a class="nav_btn active" href="/n/{{.Cobj.Id}}">{{.Cobj.Name}}</a>
         {{end}}
