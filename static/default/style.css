@@ -142,7 +142,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
         .logo a:active {color: #fff;text-shadow: #666 0 0 20px;}
         .hdlogo {display:none;}
         .scbox {float:left;width:200px;margin:10px 0 0 30px;}
-        .scbox input {width:200px;height:30px;font-size: 14px;line-height: 24px;outline: none;border-radius:15px;padding:0 6px 0 6px;background-color:#E2E2E2;color:#999;vertical-align: middle; border: none;}
+        .scbox input {width:200px;height:30px;font-size: 14px;line-height: 24px;outline: none;border-radius:15px;padding:0 6px 0 6px;color:#999;vertical-align: middle; border: none;}
         .banner {float:right;padding:15px;}
         .banner img{vertical-align: middle;border-radius: 4px;}
         .avatar-mini {max-height:24px;max-width:24px;}
@@ -168,7 +168,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
             .nav-title a {color: #465567;}
 
             .no-comment {width:706px;padding:10px;background-color:#FFF;margin-bottom:20px;border: 2px dashed #BBB;color:#999;text-align:center;}
-            .main-box {width:710px;padding:10px;margin-bottom:20px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);border-bottom: 2px solid #E2E2E9;background: #FFF url("img/bg_item.png") repeat-x bottom center;}
+            .main-box {width:710px;padding:10px;margin-bottom:20px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-bottom: 2px solid #E2E2E9;background: #FFF;}
                 .home-box-list {width:730px;padding:10px 0 15px 0;}
                 .topic-title {margin-bottom:10px;}
                 .topic-title-main {max-width:620px;}
