@@ -242,7 +242,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .sider-box-title {border-bottom:1px solid #E2E2E2;margin-bottom:10px;padding:10px;color:#666;font-size:12px;background-color:#FFF;border-top-left-radius:5px;border-top-right-radius:5px;color:#465567;background-image: linear-gradient(top, #F9F9FA, #E0E2E8);background-color: #edf4ed;}
                 .sider-box-title a {color: #465567;}
                 .sider-box-content {margin-bottom:10px;padding:0 10px 10px 10px;}
-                .sider-box-content .btn a {display:block;padding:4px 8px;border:0.3px solid #CCC;float:left;margin:0 4px 6px 0;color:#666;background-color:#F9F9F9;white-space: nowrap;border-radius: 4px;}
+                .sider-box-content .btn a {display:block;padding:4px 8px;border:0.3px solid #CCC;float:left;margin:0 4px 6px 0;color:#666;background-color:#FFF;white-space: nowrap;border-radius: 4px;}
                 .sider-box-content .btn a:hover {border:0.3px solid #AAA;text-decoration:none;color:#000;background-color:#F6F6F6;}
                 .sider-box-content ul {list-style:none;}
                 .sider-box-content ul li {color:#999;width:250px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;margin-bottom:10px;line-height:1.2em;}

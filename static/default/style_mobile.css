@@ -216,7 +216,7 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
                 .commont-content {WORD-WRAP: break-word;}
                 .commont-content img {display:block;margin-top:10px;max-width:100%;}
                 .commont-content embed {display:block;margin-top:10px;max-width:100%;}
-                .main-box-node .btn a {display:block;padding:4px 8px;font-size:12px;border:1px solid #ECECEC;float:left;margin:0 4px 6px 0;color:#666;background-color:#F9F9F9;white-space: nowrap;border-radius: 4px;}
+                .main-box-node .btn a {display:block;padding:4px 8px;font-size:12px;border:1px solid #ECECEC;float:left;margin:0 4px 6px 0;color:#666;background-color:#FFF;white-space: nowrap;border-radius: 4px;}
                 .main-box-node .btn a:hover {border:1px solid #CCC;text-decoration:none;color:#000;background-color:#F6F6F6;}
                 .member-avatar {float:left; margin:10px;width:73px;height:73px;}
                 .member-avatar img {width: 73px;height: 73px;}
