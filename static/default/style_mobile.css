@@ -157,14 +157,14 @@ img.avatar {-moz-border-radius: 4px;border-radius: 4px;}
         .banner a{color: #FFF}
         .avatar-mini {max-height:24px;max-width:24px;}
 
-.main-wrap {width:100%;background-color:#CCC;padding:10px 0 1px 0;}
+.main-wrap {width:100%;background-color:#f9f9f9;}
     .main {width:100%;margin:0;}
         .main-content {width:100%;}
             .tiptitle {margin:0 auto;width:80%;margin-bottom:10px;border-bottom:2px solid #CCC;padding:10px;color:#CCC;font-size:12px;background-color:#000;border-radius:5px;box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);}
-            .nav-title {border-bottom:1px solid #E2E2E2;padding:10px;font-size:12px;border-top-left-radius:5px;border-top-right-radius:5px;box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.15);color:#465567;background-image: linear-gradient(top, #F9F9FA, #E0E2E8);background-color: #edf4ed;background-repeat: repeat-x;-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0px 3px rgba(0, 0, 0, 0.25);box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0px 3px rgba(0, 0, 0, 0.25);}
+            .nav-title {border-bottom:1px solid #E2E2E2;padding:10px;font-size:12px;color:#465567;background-image: linear-gradient(top, #F9F9FA, #E0E2E8);background-color: #edf4ed;background-repeat: repeat-x;-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0px 3px rgba(0, 0, 0, 0.25);box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0px 3px rgba(0, 0, 0, 0.25);}
             .nav-title a {color: #465567;}
-            .no-comment {margin:0 auto;width:90%;padding:10px;background-color:#FFF;margin-bottom:10px;border: 2px dashed #BBB;color:#999;text-align:center;}
-            .main-box {padding:10px;margin-bottom:10px;border-bottom-left-radius:5px;border-bottom-right-radius:5px;border-bottom: 2px solid #E2E2E9;background-color: #FFF;}
+            .no-comment {margin:0 auto;width:90%;padding:10px;background-color:#FFF;margin-bottom:10px;margin-top: 10px;border: 2px dashed #BBB;color:#999;text-align:center;}
+            .main-box {padding:10px;border-bottom: 2px solid #E2E2E9;background-color: #FFF;}
                 .home-box-list {padding:10px 0 15px 0;}
                 .topic-title {margin-bottom:10px;}
                 .topic-title-main {width:81%;}
