@@ -104,11 +104,9 @@ func (h *BaseHandler) UserSettingPost(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 
-		if currentUser.Avatar == "0" || len(currentUser.Avatar) == 0 {
-			currentUser.Avatar = uid
-			jb, _ := json.Marshal(currentUser)
-			h.App.Db.Hset("user", youdb.I2b(currentUser.Id), jb)
-		}
+		currentUser.Avatar = uid
+		jb, _ := json.Marshal(currentUser)
+		h.App.Db.Hset("user", youdb.I2b(currentUser.Id), jb)
 
 		http.Redirect(w, r, "/setting#2", http.StatusSeeOther)
 		return
