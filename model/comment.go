@@ -3,9 +3,12 @@ package model
 import (
 	"encoding/json"
 	"errors"
-	"github.com/terminus2049/2049bbs/util"
-	"github.com/ego008/youdb"
 	"html/template"
+	"strconv"
+	"strings"
+
+	"github.com/ego008/youdb"
+	"github.com/terminus2049/2049bbs/util"
 )
 
 type Comment struct {
@@ -56,7 +59,7 @@ func CommentDelByKey(db *youdb.DB, aid string, cid uint64) error {
 	return db.Hdel("article_comment:"+aid, youdb.I2b(cid))
 }
 
-func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int) CommentPageInfo {
+func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int, hideuser string) CommentPageInfo {
 	var items []CommentListItem
 	var citems []Comment
 	userMap := map[uint64]UserMini{}
@@ -111,6 +114,16 @@ func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int) CommentPageIn
 				AddTimeFmt: util.TimeFmt(citem.AddTime, "2006-01-02", tz),
 				ContentFmt: template.HTML(util.ContentFmt(db, citem.Content)),
 			}
+
+			if hideuser != "" {
+				for _, uid := range strings.Split(hideuser, ",") {
+					uid, err := strconv.ParseUint(uid, 10, 64)
+					if err == nil && item.Uid == uid {
+						item.ContentFmt = template.HTML("<p><strike>用户已注销，隐藏回帖</strike></p>")
+					}
+				}
+			}
+
 			items = append(items, item)
 			if firstKey == 0 {
 				firstKey = item.Id

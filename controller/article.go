@@ -462,28 +462,10 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cobj.Articles = db.Zget("category_article_num", youdb.I2b(cobj.Id)).Uint64()
-	pageInfo := model.CommentList(db, cmd, "article_comment:"+aid, key, scf.CommentListNum, scf.TimeZone)
+	pageInfo := model.CommentList(db, cmd, "article_comment:"+aid, key, scf.CommentListNum, scf.TimeZone, scf.HideUser)
 
 	if currentUser.IgnoreUser != "" {
 		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
-			uid, err := strconv.ParseUint(uid, 10, 64)
-
-			if err != nil {
-				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
-				return
-			}
-
-			for i := 0; i < len(pageInfo.Items); i++ {
-				if pageInfo.Items[i].Uid == uid {
-					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
-					i--
-				}
-			}
-		}
-	}
-
-	if scf.HideUser != "" {
-		for _, uid := range strings.Split(scf.HideUser, ",") {
 			uid, err := strconv.ParseUint(uid, 10, 64)
 
 			if err != nil {
