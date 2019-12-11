@@ -38,6 +38,7 @@ type SiteConf struct {
 	MainNodeIds       string
 	MustLoginNodeIds  string
 	NotHomeNodeIds    string
+	HideUser          string
 	TimeZone          int
 	HomeShowNum       int
 	PageShowNum       int

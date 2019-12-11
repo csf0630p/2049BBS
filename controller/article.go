@@ -482,6 +482,24 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
+	if scf.HideUser != "" {
+		for _, uid := range strings.Split(scf.HideUser, ",") {
+			uid, err := strconv.ParseUint(uid, 10, 64)
+
+			if err != nil {
+				w.Write([]byte(`{"retcode":400,"retmsg":"type err"}`))
+				return
+			}
+
+			for i := 0; i < len(pageInfo.Items); i++ {
+				if pageInfo.Items[i].Uid == uid {
+					pageInfo.Items = append(pageInfo.Items[:i], pageInfo.Items[i+1:]...)
+					i--
+				}
+			}
+		}
+	}
+
 	type articleForDetail struct {
 		model.Article
 		ContentFmt  template.HTML
