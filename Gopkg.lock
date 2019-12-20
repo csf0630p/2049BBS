@@ -117,12 +117,12 @@
   version = "v1.2.1"
 
 [[projects]]
-  digest = "1:2ee0f15eb0fb04f918db7c2dcf39745f40d69f798ef171610a730e8a56aaa4fd"
+  branch = "master"
+  digest = "1:c0d79013cb6aa64cb62568bf71bdaf9d6f9bf87a0c8574c2c35d13b2fb2d1c31"
   name = "github.com/russross/blackfriday"
   packages = ["."]
   pruneopts = "UT"
-  revision = "d3b5b032dc8e8927d31a5071b56e14c89f045135"
-  version = "v2.0.1"
+  revision = "a925a152c144ea7de0f451eaf2f7db9e52fa005a"
 
 [[projects]]
   digest = "1:d917313f309bda80d27274d53985bc65651f81a5b66b820749ac7f8ef061fd04"
@@ -385,6 +385,7 @@
     "github.com/ego008/youdb",
     "github.com/gorilla/securecookie",
     "github.com/rs/xid",
+    "github.com/russross/blackfriday",
     "github.com/shurcooL/github_flavored_markdown",
     "github.com/terminus2049/2049bbs/controller",
     "github.com/terminus2049/2049bbs/cronjob",
