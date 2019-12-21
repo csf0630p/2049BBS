@@ -287,7 +287,7 @@ func (h *BaseHandler) UserDetail(w http.ResponseWriter, r *http.Request) {
 
 	if uobj.Hidden && currentUser.Flag < 99 {
 		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte(`{"retcode":404,"retmsg":"not found"}`))
+		w.Write([]byte(`{"retcode":404,"retmsg":"你来晚了，用户已注销"}`))
 		return
 	}
 
