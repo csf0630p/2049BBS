@@ -35,6 +35,7 @@ type UserMini struct {
 	Id     uint64 `json:"id"`
 	Name   string `json:"name"`
 	Avatar string `json:"avatar"`
+	Flag   int    `json:"flag"`
 }
 
 type UserPageInfo struct {

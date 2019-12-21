@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"html/template"
-	"strconv"
-	"strings"
 
 	"github.com/ego008/youdb"
 	"github.com/terminus2049/2049bbs/util"
@@ -24,6 +22,7 @@ type CommentListItem struct {
 	Id         uint64 `json:"id"`
 	Aid        uint64 `json:"aid"`
 	Uid        uint64 `json:"uid"`
+	Flag       int    `json:"flag"`
 	Name       string `json:"name"`
 	Avatar     string `json:"avatar"`
 	Content    string `json:"content"`
@@ -59,7 +58,7 @@ func CommentDelByKey(db *youdb.DB, aid string, cid uint64) error {
 	return db.Hdel("article_comment:"+aid, youdb.I2b(cid))
 }
 
-func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int, hideuser string) CommentPageInfo {
+func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int) CommentPageInfo {
 	var items []CommentListItem
 	var citems []Comment
 	userMap := map[uint64]UserMini{}
@@ -109,19 +108,15 @@ func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int, hideuser stri
 				Aid:        citem.Aid,
 				Uid:        citem.Uid,
 				Name:       user.Name,
+				Flag:       user.Flag,
 				Avatar:     user.Avatar,
 				AddTime:    citem.AddTime,
 				AddTimeFmt: util.TimeFmt(citem.AddTime, "2006-01-02", tz),
 				ContentFmt: template.HTML(util.ContentFmt(db, citem.Content)),
 			}
 
-			if hideuser != "" {
-				for _, uid := range strings.Split(hideuser, ",") {
-					uid, err := strconv.ParseUint(uid, 10, 64)
-					if err == nil && item.Uid == uid {
-						item.ContentFmt = template.HTML("<p><strike>用户已注销，隐藏回帖</strike></p>")
-					}
-				}
+			if item.Flag == -1 {
+				item.ContentFmt = template.HTML("<p><strike>用户已注销，隐藏回帖</strike></p>")
 			}
 
 			items = append(items, item)

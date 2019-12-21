@@ -462,7 +462,7 @@ func (h *BaseHandler) ArticleDetail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	cobj.Articles = db.Zget("category_article_num", youdb.I2b(cobj.Id)).Uint64()
-	pageInfo := model.CommentList(db, cmd, "article_comment:"+aid, key, scf.CommentListNum, scf.TimeZone, scf.HideUser)
+	pageInfo := model.CommentList(db, cmd, "article_comment:"+aid, key, scf.CommentListNum, scf.TimeZone)
 
 	if currentUser.IgnoreUser != "" {
 		for _, uid := range strings.Split(currentUser.IgnoreUser, ",") {
