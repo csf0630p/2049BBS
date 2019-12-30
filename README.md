@@ -39,6 +39,10 @@ d798030a6f0f        docker.pkg.github.com/speechfree/go-base/go-base:base       
  - 在宿主机打开任意浏览器输入 `http://localhost:8000` 即可看到构建成功的应用。
  - 另，在开发过程中，为了方便修改代码后重载应用，可以通过 `realize start` 启动应用，则修改任何 Golang 代码，其均会自动构建加载。
 
+### 数据库
+
+如果没有 kv 数据库开发经验，最好在程序跑起来后，用 [boltdbweb](https://github.com/evnix/boltdbweb) 打开数据库文件 `mydata.db`，了解一下内部存储结构。
+
 ## 部署
 
 编译二进制文件 `go build`，~~非 Linux 平台为交叉编译 `GOOS=linux GOARCH=amd64 go build`~~，由于使用了 gojieba 分词引擎，不能跨平台编译，请使用在线api功能、移除相关组件后再尝试跨平台编译。
