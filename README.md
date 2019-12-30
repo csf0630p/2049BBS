@@ -47,7 +47,7 @@ d798030a6f0f        docker.pkg.github.com/speechfree/go-base/go-base:base       
 
 编译二进制文件 `go build`，~~非 Linux 平台为交叉编译 `GOOS=linux GOARCH=amd64 go build`~~，由于使用了 gojieba 分词引擎，不能跨平台编译，请使用在线api功能、移除相关组件后再尝试跨平台编译。
 
-将编译好的二进制文件与 config、static 和 view 三个文件夹的文件放在同一个文件夹内，运行 `./goyoubbs`。
+将编译好的二进制文件与 config、static 和 view 三个文件夹的文件放在同一个文件夹内，运行 `./2049bbs`。
 
 服务器配置：在生产环境中，建议打开 `https`，把 `config.yaml` 中 `HttpsOn: false` 改为 `true`。也可以自行申请 cloudflare 证书，相应配置可以参考 [config-2049.yaml](https://github.com/Terminus2049/2049BBS/blob/master/config/config-2049.yaml).
 
