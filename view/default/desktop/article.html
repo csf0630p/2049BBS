@@ -98,7 +98,8 @@
             </a>
         </div>
         <div class="commont-data">
-            <div class="commont-content">
+            <p class="expand-one"><a href="javascript:;" onclick="$(this).parent().parent().children('.commont-content').slideToggle('slow');">被折叠</a></p>
+            <div class="commont-content collapse" style="display:none;">
                 {{$item.ContentFmt}}
             </div>
 
