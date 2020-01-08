@@ -16,6 +16,7 @@ type Comment struct {
 	Content  string `json:"content"`
 	ClientIp string `json:"clientip"`
 	AddTime  uint64 `json:"addtime"`
+	Fold     bool   `json:"fold"`
 }
 
 type CommentListItem struct {
@@ -29,6 +30,7 @@ type CommentListItem struct {
 	ContentFmt template.HTML
 	AddTime    uint64 `json:"addtime"`
 	AddTimeFmt string `json:"addtimefmt"`
+	Fold       bool   `json:"fold"`
 }
 
 type CommentPageInfo struct {
@@ -113,6 +115,7 @@ func CommentList(db *youdb.DB, cmd, tb, key string, limit, tz int) CommentPageIn
 				AddTime:    citem.AddTime,
 				AddTimeFmt: util.TimeFmt(citem.AddTime, "2006-01-02", tz),
 				ContentFmt: template.HTML(util.ContentFmt(db, citem.Content)),
+				Fold:       citem.Fold,
 			}
 
 			if item.Flag == -1 {

@@ -108,6 +108,9 @@
                     <a href="/member/{{$item.Uid}}">{{$item.Name}}</a> at {{$item.AddTimeFmt}}
                     {{if ge $.CurrentUser.Flag 99}}
                     &nbsp;&nbsp;&nbsp; • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}">编辑</a>
+                    <div class="float-right fold">
+                      • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}?act=fold" onclick="javascript:return confirm('您确定要折叠吗?')">折叠</a>
+                    </div>
                     {{end}}
                 </div>
                 <div class="float-right">

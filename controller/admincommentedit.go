@@ -2,12 +2,13 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/terminus2049/2049bbs/model"
-	"github.com/terminus2049/2049bbs/util"
-	"github.com/rs/xid"
-	"goji.io/pat"
 	"net/http"
 	"strconv"
+
+	"github.com/rs/xid"
+	"github.com/terminus2049/2049bbs/model"
+	"github.com/terminus2049/2049bbs/util"
+	"goji.io/pat"
 )
 
 func (h *BaseHandler) CommentEdit(w http.ResponseWriter, r *http.Request) {
@@ -50,6 +51,14 @@ func (h *BaseHandler) CommentEdit(w http.ResponseWriter, r *http.Request) {
 		// remove
 		model.CommentDelByKey(db, aid, cidI)
 		http.Redirect(w, r, "/", http.StatusSeeOther)
+		return
+	}
+
+	if act == "fold" {
+		// 折叠
+		model.CommentSetByKey(db, aid, cidI, cobj)
+		http.Redirect(w, r, "/t/"+aid, http.StatusSeeOther)
+		h.DelCookie(w, "token")
 		return
 	}
 
