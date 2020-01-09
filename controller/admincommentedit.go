@@ -56,6 +56,7 @@ func (h *BaseHandler) CommentEdit(w http.ResponseWriter, r *http.Request) {
 
 	if act == "fold" {
 		// 折叠
+		cobj.Fold = !cobj.Fold
 		model.CommentSetByKey(db, aid, cidI, cobj)
 		http.Redirect(w, r, "/t/"+aid, http.StatusSeeOther)
 		h.DelCookie(w, "token")

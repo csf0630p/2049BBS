@@ -90,6 +90,7 @@
 <div class="main-box home-box-list">
 
     {{range $_, $item := .PageInfo.Items}}
+    {{if not $item.Fold }}
     <a name="{{$item.Id}}"></a>
     <div class="commont-item">
         <div class="commont-avatar">
@@ -98,8 +99,7 @@
             </a>
         </div>
         <div class="commont-data">
-            <p class="expand-one"><a href="javascript:;" onclick="$(this).parent().parent().children('.commont-content').slideToggle('slow');">被折叠</a></p>
-            <div class="commont-content collapse" style="display:none;">
+            <div class="commont-content">
                 {{$item.ContentFmt}}
             </div>
 
@@ -108,9 +108,7 @@
                     <a href="/member/{{$item.Uid}}">{{$item.Name}}</a> at {{$item.AddTimeFmt}}
                     {{if ge $.CurrentUser.Flag 99}}
                     &nbsp;&nbsp;&nbsp; • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}">编辑</a>
-                    <div class="float-right fold">
-                      • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}?act=fold" onclick="javascript:return confirm('您确定要折叠吗?')">折叠</a>
-                    </div>
+                      • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}?act=fold" onclick="javascript:return confirm('您确定折叠吗?')">折叠</a>
                     {{end}}
                 </div>
                 <div class="float-right">
@@ -129,6 +127,49 @@
         </div>
         <div class="c"></div>
     </div>
+    {{end}}
+    {{end}}
+
+    {{range $_, $item := .PageInfo.Items}}
+    {{if $item.Fold }}
+    <a name="{{$item.Id}}"></a>
+    <div class="commont-item">
+        <div class="commont-avatar">
+            <a href="/member/{{$item.Uid}}">
+                <img src="/static/avatar/{{$item.Avatar}}.jpg" alt="{{$item.Name}}" />
+            </a>
+        </div>
+        <div class="commont-data">
+            <p class="expand-one"><a href="javascript:;" onclick="$(this).parent().parent().children('.commont-content').slideToggle('slow');">回复被折叠</a></p>
+            <div class="commont-content collapse" style="display:none;">
+                {{$item.ContentFmt}}
+            </div>
+
+            <div class="commont-data-date">
+                <div class="float-left">
+                    <a href="/member/{{$item.Uid}}">{{$item.Name}}</a> at {{$item.AddTimeFmt}}
+                    {{if ge $.CurrentUser.Flag 99}}
+                    &nbsp;&nbsp;&nbsp; • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}">编辑</a>
+                      • <a href="/admin/comment/edit/{{$item.Aid}}/{{$item.Id}}?act=fold" onclick="javascript:return confirm('您确定要取消折叠吗?')">取消折叠</a>
+                    {{end}}
+                </div>
+                <div class="float-right">
+                    {{if ge $.CurrentUser.Flag 5}}
+                    {{if not $.Aobj.CloseComment}}
+                    {{if ne $.CurrentUser.Id $item.Uid}}
+                    &laquo; <a href="#new-comment" onclick="replyto('{{$item.Name}} #{{$item.Id}}');">回复</a>
+                    {{end}}
+                    {{end}}
+                    {{end}}
+                    <span class="commonet-count">{{$item.Id}}</span>
+                </div>
+                <div class="c"></div>
+            </div>
+            <div class="c"></div>
+        </div>
+        <div class="c"></div>
+    </div>
+    {{end}}
     {{end}}
 
 
