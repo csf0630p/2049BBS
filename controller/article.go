@@ -658,7 +658,10 @@ func (h *BaseHandler) ArticleDetailPost(w http.ResponseWriter, r *http.Request) 
 		db.Hset("user", youdb.I2b(currentUser.Id), jb3)
 
 		// 总文章列表
-		db.Zset("article_timeline", youdb.I2b(aobj.Id), timeStamp)
+		if currentUser.Flag != 6 {
+			db.Zset("article_timeline", youdb.I2b(aobj.Id), timeStamp)
+		}
+
 		// 分类文章列表
 		db.Zset("category_article_timeline:"+strconv.FormatUint(aobj.Cid, 10), youdb.I2b(aobj.Id), timeStamp)
 
